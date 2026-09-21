@@ -1,3 +1,5 @@
+package View;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -106,7 +108,7 @@ public class Mapa
 
 	private void dibujarPoligono() 
 	{
-		btnDibujarPolgono = new JButton("Dibujar Pol\u00EDgono");
+		btnDibujarPolgono = new JButton("Dibujar Polígono");
 		btnDibujarPolgono.setBounds(10, 11, 195, 23);
 		btnDibujarPolgono.addActionListener(new ActionListener() 
 		{
@@ -120,7 +122,7 @@ public class Mapa
 
 	private void eliminarPoligono() 
 	{
-		btnEliminar = new JButton("Eliminar Pol�gono");
+		btnEliminar = new JButton("Eliminar Polígono");
 		btnEliminar.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent arg0) 
