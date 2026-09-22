@@ -3,84 +3,72 @@ package Model;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Grafo
-{
-	// Representamos el grafo por su matriz de adyacencia
-	private boolean[][] A;
+public class Grafo {
 
-	// La cantidad de vertices esta predeterminada desde el constructor
-	public Grafo(int vertices)
-	{
-		A = new boolean[vertices][vertices];
+	private Arista[][] matriz;
+
+	public Grafo(int vertices) {
+		matriz = new Arista[vertices][vertices];
 	}
 
-	// Agregado de aristas
-	public void agregarArista(int i, int j)
-	{
-		verificarVertice(i);
-		verificarVertice(j);
-		verificarDistintos(i, j);
-
-		A[i][j] = true;
-		A[j][i] = true;
+	public void agregarArista(int origen,int destino, double peso) {
+		verificarVertice(origen);
+		verificarVertice(destino);
+		verificarDistintos(origen,destino);
+		
+		Arista arista = new Arista(origen, destino, peso);
+		
+		matriz[origen][destino] = arista;
+		matriz[destino][origen] = arista;
 	}
 
-	// Eliminacion de aristas
-	public void eliminarArista(int i, int j)
-	{
-		verificarVertice(i);
-		verificarVertice(j);
-		verificarDistintos(i, j);
+    public void eliminarArista(int origen, int destino) {
+        verificarVertice(origen);
+        verificarVertice(destino);
+        verificarDistintos(origen, destino);
 
-		A[i][j] = false;
-		A[j][i] = false;
-	}
+        matriz[origen][destino] = null;
+        matriz[destino][origen] = null;
+    }
 
-	// Informa si existe la arista especificada
-	public boolean existeArista(int i, int j)
-	{
-		verificarVertice(i);
-		verificarVertice(j);
-		verificarDistintos(i, j);
+    public boolean existeArista(int origen, int destino) {
+        verificarVertice(origen);
+        verificarVertice(destino);
+        verificarDistintos(origen, destino);
 
-		return A[i][j];
-	}
+        return matriz[origen][destino] != null;
+    }
+    
+   public int tamano() {
+	   return matriz.length;
+   }
 
-	// Cantidad de vertices
-	public int tamano()
-	{
-		return A.length;
-	}
+	public Set<Integer> vecinos(int vertice) {
+		verificarVertice(vertice);
 
-	// Vecinos de un vertice
-	public Set<Integer> vecinos(int i)
-	{
-		verificarVertice(i);
-
-		Set<Integer> ret = new HashSet<Integer>();
-		for(int j = 0; j < this.tamano(); ++j) if( i != j )
-		{
-			if( this.existeArista(i,j) )
-				ret.add(j);
+		Set<Integer> vecinos = new HashSet<Integer>();
+		for(int j = 0; j < this.tamano(); ++j) if( vertice != j ) {
+			if( this.existeArista(vertice,j) ) {
+				vecinos.add(j);
+			}
 		}
-
-		return ret;		
+		return vecinos;		
+	}
+   	
+	//	VERIFICA QUE LOS VERTICES NO SEAN IGUALES
+	private void verificarDistintos(int origen, int destino) {		
+		if( origen == destino) {
+			throw new IllegalArgumentException("No se permiten loops: (" + origen + ", " + destino + ")");
+		}
 	}
 
-	// Verifica que sea un vertice valido
-	private void verificarVertice(int i)
-	{
-		if( i < 0 )
-			throw new IllegalArgumentException("El vertice no puede ser negativo: " + i);
-
-		if( i >= A.length )
-			throw new IllegalArgumentException("Los vertices deben estar entre 0 y |V|-1: " + i);
-	}
-
-	// Verifica que i y j sean distintos
-	private void verificarDistintos(int i, int j)
-	{
-		if( i == j )
-			throw new IllegalArgumentException("No se permiten loops: (" + i + ", " + j + ")");
+	//VERIFICA QUE LOS VERTICES ESTEN EN RANGO	
+	private void verificarVertice(int vertice) {
+		if(vertice<0) {
+			throw new IllegalArgumentException("El vertice no puede ser negativo: " + vertice);
+		}
+		if (vertice >= matriz.length) {
+			throw new IllegalArgumentException("Los vertices deben estar entre 0 y |V|-1: " + vertice);
+		}
 	}
 }
