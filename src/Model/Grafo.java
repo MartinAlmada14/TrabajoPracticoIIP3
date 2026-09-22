@@ -12,36 +12,40 @@ public class Grafo {
 	}
 
 	public void agregarArista(int origen,int destino, double peso) {
-		verificarVertice(origen);
-		verificarVertice(destino);
-		verificarDistintos(origen,destino);
-		
+		verificarAmbosVetices(origen, destino);
+
 		Arista arista = new Arista(origen, destino, peso);
-		
+
 		matriz[origen][destino] = arista;
 		matriz[destino][origen] = arista;
 	}
 
-    public void eliminarArista(int origen, int destino) {
-        verificarVertice(origen);
-        verificarVertice(destino);
-        verificarDistintos(origen, destino);
+	public void eliminarArista(int origen, int destino) {
+		verificarAmbosVetices(origen, destino);
 
-        matriz[origen][destino] = null;
-        matriz[destino][origen] = null;
-    }
+		matriz[origen][destino] = null;
+		matriz[destino][origen] = null;
+	}
 
-    public boolean existeArista(int origen, int destino) {
-        verificarVertice(origen);
-        verificarVertice(destino);
-        verificarDistintos(origen, destino);
+	public boolean existeArista(int origen, int destino) {
+		verificarAmbosVetices(origen, destino);
 
-        return matriz[origen][destino] != null;
-    }
-    
-   public int tamano() {
-	   return matriz.length;
-   }
+		return matriz[origen][destino] != null;
+	}
+
+	public double pesoArista(int origen, int destino) {
+		verificarAmbosVetices(origen, destino);
+
+		if (!existeArista(origen, destino)) {
+			throw new IllegalArgumentException(
+					"No existe una arista entre " + origen + " y " + destino);
+		}
+		return matriz[origen][destino].getPeso();
+	}
+
+	public int tamano() {
+		return matriz.length;
+	}
 
 	public Set<Integer> vecinos(int vertice) {
 		verificarVertice(vertice);
@@ -54,7 +58,7 @@ public class Grafo {
 		}
 		return vecinos;		
 	}
-   	
+
 	//	VERIFICA QUE LOS VERTICES NO SEAN IGUALES
 	private void verificarDistintos(int origen, int destino) {		
 		if( origen == destino) {
@@ -70,5 +74,11 @@ public class Grafo {
 		if (vertice >= matriz.length) {
 			throw new IllegalArgumentException("Los vertices deben estar entre 0 y |V|-1: " + vertice);
 		}
+	}
+
+	private void verificarAmbosVetices(int origen, int destino) {
+		verificarVertice(destino);
+		verificarVertice(origen);
+		verificarDistintos(origen, destino);
 	}
 }
