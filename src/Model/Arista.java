@@ -1,26 +1,31 @@
 package Model;
 
-public class Arista {
+public class Arista implements Comparable<Arista> {
 
-    private int origen;
-    private int destino;
-    private double peso;
+	private int origen;
+	private int destino;
+	private double peso;
 
-    public Arista(int origen, int destino, double peso) {
-        this.origen = origen;
-        this.destino = destino;
-        this.peso = peso;
-    }
+	public Arista(int origen, int destino, double peso) {
+		this.origen = origen;
+		this.destino = destino;
+		this.peso = peso;
+	}
 
-    public int getOrigen() {
-        return origen;
-    }
+	public int getOrigen() {
+		return origen;
+	}
 
-    public int getDestino() {
-        return destino;
-    }
+	public int getDestino() {
+		return destino;
+	}
 
-    public double getPeso() {
-        return peso;
-    }
+	public double getPeso() {
+		return peso;
+	}
+
+	@Override
+	public int compareTo(Arista otraArista) {
+		return Double.compare(this.peso, otraArista.peso);
+	}
 }

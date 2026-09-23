@@ -1,10 +1,12 @@
 package Model;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class Grafo {
-	private Set<Arista> aristas;
+	private List<Arista> aristas;
 	private Arista[][] matriz;
 
 	public Grafo(int vertices) {
@@ -60,8 +62,8 @@ public class Grafo {
 	}
 
 	//	OBTENGO LAS ARISTAS SIN REPETIDOS
-	public Set<Arista> aristas(){
-		aristas = new HashSet<Arista>();
+	public List<Arista> aristas(){
+		aristas = new ArrayList<Arista>();
 
 		for (int fila = 0; fila < matriz.length; fila++) {
 			for (int columna = fila +1 ; columna < matriz.length; columna++) {
