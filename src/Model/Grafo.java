@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Grafo {
-
+	private Set<Arista> aristas;
 	private Arista[][] matriz;
 
 	public Grafo(int vertices) {
@@ -47,16 +47,31 @@ public class Grafo {
 		return matriz.length;
 	}
 
-	public Set<Integer> vecinos(int vertice) {
-		verificarVertice(vertice);
+	public Set<Integer> vecinos(int arista) {
+		verificarVertice(arista);
 
 		Set<Integer> vecinos = new HashSet<Integer>();
-		for(int j = 0; j < this.tamano(); ++j) if( vertice != j ) {
-			if( this.existeArista(vertice,j) ) {
+		for(int j = 0; j < this.tamano(); ++j) if( arista != j ) {
+			if( this.existeArista(arista,j) ) {
 				vecinos.add(j);
 			}
 		}
 		return vecinos;		
+	}
+
+	//	OBTENGO LAS ARISTAS SIN REPETIDOS
+	public Set<Arista> aristas(){
+		aristas = new HashSet<Arista>();
+
+		for (int fila = 0; fila < matriz.length; fila++) {
+			for (int columna = fila +1 ; columna < matriz.length; columna++) {
+				if(matriz[fila][columna] != null) {
+					aristas.add(matriz[fila][columna]);
+				}
+			}
+
+		}
+		return aristas;
 	}
 
 	//	VERIFICA QUE LOS VERTICES NO SEAN IGUALES
