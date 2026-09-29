@@ -106,8 +106,7 @@ public class Mapa
 		});
 	}
 
-	private void dibujarPoligono() 
-	{
+	private void dibujarPoligono(){
 		btnDibujarPolgono = new JButton("Dibujar Polígono");
 		btnDibujarPolgono.setBounds(10, 11, 195, 23);
 		btnDibujarPolgono.addActionListener(new ActionListener() 
@@ -120,8 +119,7 @@ public class Mapa
 		});
 	}
 
-	private void eliminarPoligono() 
-	{
+	private void eliminarPoligono()	{
 		btnEliminar = new JButton("Eliminar Polígono");
 		btnEliminar.addActionListener(new ActionListener() 
 		{

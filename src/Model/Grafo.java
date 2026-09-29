@@ -12,6 +12,10 @@ public class Grafo {
 	public Grafo(int vertices) {
 		matriz = new Arista[vertices][vertices];
 	}
+	
+	//CONSTRUCTOR VACIO PARA LA SERIALIZACION CON EL GSON
+	public Grafo() {	
+	}
 
 	public void agregarArista(int origen,int destino, double peso) {
 		verificarAmbosVetices(origen, destino);
