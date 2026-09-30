@@ -7,7 +7,7 @@ public class Pais {
 	private List<Provincia> provincias = new ArrayList<Provincia>();
 	private Grafo grafo = new Grafo(0);
 	
-	public int agragarProvincia(Provincia provincia) {
+	public int agregarProvincia(Provincia provincia) {
 		provincias.add(provincia);
 		redimensionarGrafo();
 		return provincias.size() - 1;
@@ -15,6 +15,10 @@ public class Pais {
 	
 	public void agregarFrontera(int origen, int destino, double similaridad) {
 		grafo.agregarArista(origen, destino, similaridad);
+	}
+	
+	public void eliminarFrontera(int origen, int destino) {
+		grafo.eliminarArista(origen, destino);
 	}
 	
 	public void redimensionarGrafo() {
@@ -29,17 +33,12 @@ public class Pais {
 		return provincias;
 	}
 
-	public void setProvincias(List<Provincia> provincias) {
-		this.provincias = provincias;
+	public Provincia getProvincia(int indice) {
+		return provincias.get(indice);
 	}
-
+	
 	public Grafo getGrafo() {
 		return grafo;
 	}
-
-	public void setGrafo(Grafo grafo) {
-		this.grafo = grafo;
-	}
-	
 	
 }

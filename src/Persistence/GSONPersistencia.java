@@ -45,6 +45,19 @@ public class GSONPersistencia implements IPersistencia {
 			throw new RuntimeException("No se pudo leer " + FILE_PATH, e);
 		}
 	}
+	
+	@Override
+	public Optional<Pais> cargar(Path archivo) {
+		if(!Files.exists(archivo)) {
+			return Optional.empty();
+		}
+		try(Reader reader = Files.newBufferedReader(archivo)) {
+			return Optional.ofNullable(gson.fromJson(reader, Pais.class));
+		}
+		catch (IOException e) {
+			throw new RuntimeException("No se pudo leer " + archivo, e);
+		}
+	}
 
 	@Override
 	public void guardar(Pais pais) {

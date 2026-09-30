@@ -1,0 +1,1207 @@
+{
+  "provincias": [
+    {
+      "nombre": "Tierra Del Fuego",
+      "latitud": -54.36775852406839,
+      "longitud": -67.8515625
+    },
+    {
+      "nombre": "Santa Cruz",
+      "latitud": -48.86471476180277,
+      "longitud": -69.78515625
+    },
+    {
+      "nombre": "Chubut",
+      "latitud": -43.83452678223682,
+      "longitud": -68.73046875
+    },
+    {
+      "nombre": "Rio Negro",
+      "latitud": -39.90973623453718,
+      "longitud": -67.060546875
+    },
+    {
+      "nombre": "Neuquen",
+      "latitud": -38.34165619279593,
+      "longitud": -69.08203125
+    },
+    {
+      "nombre": "La Pampa",
+      "latitud": -37.020098201368114,
+      "longitud": -65.390625
+    },
+    {
+      "nombre": "Buenos Aires",
+      "latitud": -35.46066995149529,
+      "longitud": -60.46875
+    },
+    {
+      "nombre": "Cordoba",
+      "latitud": -32.76880048488168,
+      "longitud": -64.072265625
+    },
+    {
+      "nombre": "Entre Rios",
+      "latitud": -32.10118973232094,
+      "longitud": -59.4580078125
+    },
+    {
+      "nombre": "Santa Fe",
+      "latitud": -31.84023266790935,
+      "longitud": -61.259765625
+    },
+    {
+      "nombre": "Corrientes",
+      "latitud": -28.998531814051795,
+      "longitud": -57.83203125
+    },
+    {
+      "nombre": "Misiones",
+      "latitud": -26.980828590472107,
+      "longitud": -54.7119140625
+    },
+    {
+      "nombre": "Formosa",
+      "latitud": -25.145284610685053,
+      "longitud": -59.39208984375
+    },
+    {
+      "nombre": "Chaco",
+      "latitud": -26.804460766546146,
+      "longitud": -59.853515625
+    },
+    {
+      "nombre": "Mendoza",
+      "latitud": -34.089061315849946,
+      "longitud": -68.466796875
+    },
+    {
+      "nombre": "San Luis",
+      "latitud": -33.46810795527895,
+      "longitud": -66.26953125
+    },
+    {
+      "nombre": "San Juan",
+      "latitud": -30.939924331023455,
+      "longitud": -68.466796875
+    },
+    {
+      "nombre": "La Rioja",
+      "latitud": -29.57345707301757,
+      "longitud": -67.0166015625
+    },
+    {
+      "nombre": "Catamarca",
+      "latitud": -27.994401411046148,
+      "longitud": -66.4892578125
+    },
+    {
+      "nombre": "Santiago del Estero",
+      "latitud": -27.839076094777802,
+      "longitud": -63.193359375
+    },
+    {
+      "nombre": "Tucuman",
+      "latitud": -26.902476886279807,
+      "longitud": -65.2587890625
+    },
+    {
+      "nombre": "Salta",
+      "latitud": -24.96614015991296,
+      "longitud": -65.5224609375
+    },
+    {
+      "nombre": "Jujuy",
+      "latitud": -23.1605633090483,
+      "longitud": -65.6103515625
+    }
+  ],
+  "grafo": {
+    "aristas": [
+      {
+        "origen": 18,
+        "destino": 19,
+        "peso": 1.0
+      },
+      {
+        "origen": 0,
+        "destino": 1,
+        "peso": 2.0
+      },
+      {
+        "origen": 1,
+        "destino": 2,
+        "peso": 2.0
+      },
+      {
+        "origen": 2,
+        "destino": 3,
+        "peso": 2.0
+      },
+      {
+        "origen": 5,
+        "destino": 6,
+        "peso": 2.0
+      },
+      {
+        "origen": 9,
+        "destino": 8,
+        "peso": 2.0
+      },
+      {
+        "origen": 10,
+        "destino": 11,
+        "peso": 2.0
+      },
+      {
+        "origen": 10,
+        "destino": 13,
+        "peso": 2.0
+      },
+      {
+        "origen": 13,
+        "destino": 12,
+        "peso": 2.0
+      },
+      {
+        "origen": 14,
+        "destino": 16,
+        "peso": 2.0
+      },
+      {
+        "origen": 15,
+        "destino": 16,
+        "peso": 2.0
+      },
+      {
+        "origen": 17,
+        "destino": 18,
+        "peso": 2.0
+      },
+      {
+        "origen": 18,
+        "destino": 20,
+        "peso": 2.0
+      },
+      {
+        "origen": 19,
+        "destino": 20,
+        "peso": 2.0
+      },
+      {
+        "origen": 21,
+        "destino": 22,
+        "peso": 2.0
+      },
+      {
+        "origen": 3,
+        "destino": 4,
+        "peso": 3.0
+      },
+      {
+        "origen": 5,
+        "destino": 7,
+        "peso": 3.0
+      },
+      {
+        "origen": 6,
+        "destino": 8,
+        "peso": 3.0
+      },
+      {
+        "origen": 6,
+        "destino": 9,
+        "peso": 3.0
+      },
+      {
+        "origen": 14,
+        "destino": 15,
+        "peso": 3.0
+      },
+      {
+        "origen": 18,
+        "destino": 21,
+        "peso": 3.0
+      },
+      {
+        "origen": 19,
+        "destino": 21,
+        "peso": 3.0
+      },
+      {
+        "origen": 9,
+        "destino": 7,
+        "peso": 4.0
+      },
+      {
+        "origen": 5,
+        "destino": 15,
+        "peso": 5.0
+      },
+      {
+        "origen": 15,
+        "destino": 7,
+        "peso": 5.0
+      },
+      {
+        "origen": 7,
+        "destino": 17,
+        "peso": 5.0
+      },
+      {
+        "origen": 9,
+        "destino": 10,
+        "peso": 5.0
+      },
+      {
+        "origen": 16,
+        "destino": 17,
+        "peso": 5.0
+      },
+      {
+        "origen": 3,
+        "destino": 5,
+        "peso": 6.0
+      },
+      {
+        "origen": 4,
+        "destino": 5,
+        "peso": 6.0
+      },
+      {
+        "origen": 4,
+        "destino": 14,
+        "peso": 6.0
+      },
+      {
+        "origen": 5,
+        "destino": 14,
+        "peso": 6.0
+      },
+      {
+        "origen": 8,
+        "destino": 10,
+        "peso": 6.0
+      },
+      {
+        "origen": 21,
+        "destino": 12,
+        "peso": 6.0
+      },
+      {
+        "origen": 19,
+        "destino": 13,
+        "peso": 6.0
+      },
+      {
+        "origen": 7,
+        "destino": 19,
+        "peso": 7.0
+      },
+      {
+        "origen": 9,
+        "destino": 13,
+        "peso": 7.0
+      },
+      {
+        "origen": 9,
+        "destino": 19,
+        "peso": 7.0
+      },
+      {
+        "origen": 21,
+        "destino": 13,
+        "peso": 7.0
+      }
+    ],
+    "matriz": [
+      [
+        null,
+        {
+          "origen": 0,
+          "destino": 1,
+          "peso": 2.0
+        },
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        {
+          "origen": 0,
+          "destino": 1,
+          "peso": 2.0
+        },
+        null,
+        {
+          "origen": 1,
+          "destino": 2,
+          "peso": 2.0
+        },
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        {
+          "origen": 1,
+          "destino": 2,
+          "peso": 2.0
+        },
+        null,
+        {
+          "origen": 2,
+          "destino": 3,
+          "peso": 2.0
+        },
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        {
+          "origen": 2,
+          "destino": 3,
+          "peso": 2.0
+        },
+        null,
+        {
+          "origen": 3,
+          "destino": 4,
+          "peso": 3.0
+        },
+        {
+          "origen": 3,
+          "destino": 5,
+          "peso": 6.0
+        },
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        {
+          "origen": 3,
+          "destino": 4,
+          "peso": 3.0
+        },
+        null,
+        {
+          "origen": 4,
+          "destino": 5,
+          "peso": 6.0
+        },
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        {
+          "origen": 4,
+          "destino": 14,
+          "peso": 6.0
+        },
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        {
+          "origen": 3,
+          "destino": 5,
+          "peso": 6.0
+        },
+        {
+          "origen": 4,
+          "destino": 5,
+          "peso": 6.0
+        },
+        null,
+        {
+          "origen": 5,
+          "destino": 6,
+          "peso": 2.0
+        },
+        {
+          "origen": 5,
+          "destino": 7,
+          "peso": 3.0
+        },
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        {
+          "origen": 5,
+          "destino": 14,
+          "peso": 6.0
+        },
+        {
+          "origen": 5,
+          "destino": 15,
+          "peso": 5.0
+        },
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        null,
+        {
+          "origen": 5,
+          "destino": 6,
+          "peso": 2.0
+        },
+        null,
+        null,
+        {
+          "origen": 6,
+          "destino": 8,
+          "peso": 3.0
+        },
+        {
+          "origen": 6,
+          "destino": 9,
+          "peso": 3.0
+        },
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        null,
+        {
+          "origen": 5,
+          "destino": 7,
+          "peso": 3.0
+        },
+        null,
+        null,
+        null,
+        {
+          "origen": 9,
+          "destino": 7,
+          "peso": 4.0
+        },
+        null,
+        null,
+        null,
+        null,
+        null,
+        {
+          "origen": 15,
+          "destino": 7,
+          "peso": 5.0
+        },
+        null,
+        {
+          "origen": 7,
+          "destino": 17,
+          "peso": 5.0
+        },
+        null,
+        {
+          "origen": 7,
+          "destino": 19,
+          "peso": 7.0
+        },
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        {
+          "origen": 6,
+          "destino": 8,
+          "peso": 3.0
+        },
+        null,
+        null,
+        {
+          "origen": 9,
+          "destino": 8,
+          "peso": 2.0
+        },
+        {
+          "origen": 8,
+          "destino": 10,
+          "peso": 6.0
+        },
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        {
+          "origen": 6,
+          "destino": 9,
+          "peso": 3.0
+        },
+        {
+          "origen": 9,
+          "destino": 7,
+          "peso": 4.0
+        },
+        {
+          "origen": 9,
+          "destino": 8,
+          "peso": 2.0
+        },
+        null,
+        {
+          "origen": 9,
+          "destino": 10,
+          "peso": 5.0
+        },
+        null,
+        null,
+        {
+          "origen": 9,
+          "destino": 13,
+          "peso": 7.0
+        },
+        null,
+        null,
+        null,
+        null,
+        null,
+        {
+          "origen": 9,
+          "destino": 19,
+          "peso": 7.0
+        },
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        {
+          "origen": 8,
+          "destino": 10,
+          "peso": 6.0
+        },
+        {
+          "origen": 9,
+          "destino": 10,
+          "peso": 5.0
+        },
+        null,
+        {
+          "origen": 10,
+          "destino": 11,
+          "peso": 2.0
+        },
+        null,
+        {
+          "origen": 10,
+          "destino": 13,
+          "peso": 2.0
+        },
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        {
+          "origen": 10,
+          "destino": 11,
+          "peso": 2.0
+        },
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        {
+          "origen": 13,
+          "destino": 12,
+          "peso": 2.0
+        },
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        {
+          "origen": 21,
+          "destino": 12,
+          "peso": 6.0
+        },
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        {
+          "origen": 9,
+          "destino": 13,
+          "peso": 7.0
+        },
+        {
+          "origen": 10,
+          "destino": 13,
+          "peso": 2.0
+        },
+        null,
+        {
+          "origen": 13,
+          "destino": 12,
+          "peso": 2.0
+        },
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        {
+          "origen": 19,
+          "destino": 13,
+          "peso": 6.0
+        },
+        null,
+        {
+          "origen": 21,
+          "destino": 13,
+          "peso": 7.0
+        },
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        {
+          "origen": 4,
+          "destino": 14,
+          "peso": 6.0
+        },
+        {
+          "origen": 5,
+          "destino": 14,
+          "peso": 6.0
+        },
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        {
+          "origen": 14,
+          "destino": 15,
+          "peso": 3.0
+        },
+        {
+          "origen": 14,
+          "destino": 16,
+          "peso": 2.0
+        },
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        null,
+        {
+          "origen": 5,
+          "destino": 15,
+          "peso": 5.0
+        },
+        null,
+        {
+          "origen": 15,
+          "destino": 7,
+          "peso": 5.0
+        },
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        {
+          "origen": 14,
+          "destino": 15,
+          "peso": 3.0
+        },
+        null,
+        {
+          "origen": 15,
+          "destino": 16,
+          "peso": 2.0
+        },
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        {
+          "origen": 14,
+          "destino": 16,
+          "peso": 2.0
+        },
+        {
+          "origen": 15,
+          "destino": 16,
+          "peso": 2.0
+        },
+        null,
+        {
+          "origen": 16,
+          "destino": 17,
+          "peso": 5.0
+        },
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        {
+          "origen": 7,
+          "destino": 17,
+          "peso": 5.0
+        },
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        {
+          "origen": 16,
+          "destino": 17,
+          "peso": 5.0
+        },
+        null,
+        {
+          "origen": 17,
+          "destino": 18,
+          "peso": 2.0
+        },
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        {
+          "origen": 17,
+          "destino": 18,
+          "peso": 2.0
+        },
+        null,
+        {
+          "origen": 18,
+          "destino": 19,
+          "peso": 1.0
+        },
+        {
+          "origen": 18,
+          "destino": 20,
+          "peso": 2.0
+        },
+        {
+          "origen": 18,
+          "destino": 21,
+          "peso": 3.0
+        },
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        {
+          "origen": 7,
+          "destino": 19,
+          "peso": 7.0
+        },
+        null,
+        {
+          "origen": 9,
+          "destino": 19,
+          "peso": 7.0
+        },
+        null,
+        null,
+        null,
+        {
+          "origen": 19,
+          "destino": 13,
+          "peso": 6.0
+        },
+        null,
+        null,
+        null,
+        null,
+        {
+          "origen": 18,
+          "destino": 19,
+          "peso": 1.0
+        },
+        null,
+        {
+          "origen": 19,
+          "destino": 20,
+          "peso": 2.0
+        },
+        {
+          "origen": 19,
+          "destino": 21,
+          "peso": 3.0
+        },
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        {
+          "origen": 18,
+          "destino": 20,
+          "peso": 2.0
+        },
+        {
+          "origen": 19,
+          "destino": 20,
+          "peso": 2.0
+        },
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        {
+          "origen": 21,
+          "destino": 12,
+          "peso": 6.0
+        },
+        {
+          "origen": 21,
+          "destino": 13,
+          "peso": 7.0
+        },
+        null,
+        null,
+        null,
+        null,
+        {
+          "origen": 18,
+          "destino": 21,
+          "peso": 3.0
+        },
+        {
+          "origen": 19,
+          "destino": 21,
+          "peso": 3.0
+        },
+        null,
+        null,
+        {
+          "origen": 21,
+          "destino": 22,
+          "peso": 2.0
+        }
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        {
+          "origen": 21,
+          "destino": 22,
+          "peso": 2.0
+        },
+        null
+      ]
+    ]
+  }
+}

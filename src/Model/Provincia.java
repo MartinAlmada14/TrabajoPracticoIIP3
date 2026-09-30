@@ -1,7 +1,6 @@
 package Model;
 
 public class Provincia {
-	private int id;
 	private String nombre;
 	private double latitud;
 	private double longitud;
@@ -17,12 +16,6 @@ public class Provincia {
 		this.longitud = longitud;
 	}
 	
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
 	public String getNombre() {
 		return nombre;
 	}
@@ -42,6 +35,10 @@ public class Provincia {
 		this.longitud = longitud;
 	}
 	
+	@Override
+	public String toString() {
+		return nombre;
+	}
 	
 	
 }

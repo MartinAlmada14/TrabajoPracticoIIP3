@@ -5,7 +5,12 @@ public class Arista implements Comparable<Arista> {
 	private int origen;
 	private int destino;
 	private double peso;
-
+	
+	//PARA EL GSON
+	public Arista() {
+		
+	}
+	
 	public Arista(int origen, int destino, double peso) {
 		this.origen = origen;
 		this.destino = destino;
