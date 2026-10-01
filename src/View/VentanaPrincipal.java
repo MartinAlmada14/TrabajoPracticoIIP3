@@ -4,10 +4,13 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 
+import Presenter.Presenter;
+
 public class VentanaPrincipal {
 	
+	private Presenter presenter;
 	private JFrame frame;
-//	private VistaMapa vistaMapa;
+	private VistaMapa vistaMapa;
 	private PanelControles controles;
 	private String nombre = "Diseñando Regiones";
 	
@@ -16,8 +19,7 @@ public class VentanaPrincipal {
 	}
 
 	private void inicializar() {
-		frame = new JFrame(nombre);
-		
+		frame = new JFrame(nombre);		
 		
 //		vistaMapa = new VistaMapa();
 		controles = new PanelControles();

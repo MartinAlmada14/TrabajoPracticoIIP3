@@ -32,8 +32,8 @@ public class Mapa implements IMapaView {
 	private JButton btnAgregarProvincia, btnAgregarFrontera, btnCalcular;
 
 	// índice de provincia -> marcador, para poder recolorear al calcular regiones
-	private final Map<Integer, MapMarkerDot> marcadores = new HashMap<>();
-	private final Map<String, MapPolygonImpl> fronterasDibujadas = new HashMap<>();
+	private Map<Integer, MapMarkerDot> marcadores = new HashMap<>();
+	private Map<String, MapPolygonImpl> fronterasDibujadas = new HashMap<>();
 	
 	private int x = 670, w = 300, y = 10;
 
