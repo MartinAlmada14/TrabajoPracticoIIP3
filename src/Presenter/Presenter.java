@@ -7,7 +7,7 @@ import java.util.Set;
 
 import Model.ArbolGeneradorMinimo;
 import Model.Pais;
-import Model.Provincia;
+import Model.Vertice;
 
 import Persistence.IPersistencia;
 
@@ -31,7 +31,7 @@ public class Presenter {
 		}
 		try {
 			List<Set<Integer>> regiones = new ArbolGeneradorMinimo(pais.getGrafo()).generarRegiones(k);
-			vista.actualizarMapaConRegiones(regiones, pais.getProvincias());
+			vista.actualizarMapaConRegiones(regiones, pais.getVertices());
 		}
 		catch (Exception e) {
 			vista.mostrarMensaje("Error al calcular regiones: " + e.getMessage());
@@ -42,8 +42,8 @@ public class Presenter {
 		if(pais == null){
 			pais = new Pais();
 		}
-		Provincia provincia = new Provincia(nombre, latitud, longitud);
-		int indice = pais.agregarProvincia(provincia);
+		Vertice provincia = new Vertice(nombre, latitud, longitud);
+		int indice = pais.agregarVertice(provincia);
 		vista.agregarMarcador(provincia, indice);
 		return indice;
 	}
@@ -54,7 +54,7 @@ public class Presenter {
 			return;
 		}
 		try {
-			pais.agregarFrontera(origen, destino, similiaridad);
+			pais.agregarRelacion(origen, destino, similiaridad);
 			vista.agregarFrontera(origen, destino, pais.getProvincia(origen), pais.getProvincia(destino));
 		}
 		catch (Exception e) {
@@ -68,7 +68,7 @@ public class Presenter {
 			return;
 		}
 		try {
-			pais.eliminarFrontera(origen, destino);
+			pais.eliminarRelacion(origen, destino);
 			vista.eliminarFrontera(origen, destino);
 			vista.mostrarMensaje("Frontera eliminada");
 		}
@@ -98,7 +98,7 @@ public class Presenter {
 	public void cargarDesde(Optional<Pais> resultado) {
 		resultado.ifPresentOrElse(p -> {
 			this.pais = p; 
-			vista.cargarPais(p.getProvincias(), p.getGrafo().aristas());
+			vista.cargarPais(p.getVertices(), p.getGrafo().aristas());
 			vista.mostrarMensaje("Grafo cargado");
 			}, () -> vista.mostrarMensaje("No se encontro ningun grafo en ese archivo."));
 	}

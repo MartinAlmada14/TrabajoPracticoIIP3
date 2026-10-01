@@ -1,16 +1,16 @@
 package Model;
 
-public class Provincia {
+public class Vertice {
 	private String nombre;
 	private double latitud;
 	private double longitud;
 	
 	//PARA GSON
-	public Provincia() {
+	public Vertice() {
 		
 	}
 	
-	public Provincia(String nombre, double latitud, double longitud) {
+	public Vertice(String nombre, double latitud, double longitud) {
 		this.nombre = nombre;
 		this.latitud = latitud;
 		this.longitud = longitud;

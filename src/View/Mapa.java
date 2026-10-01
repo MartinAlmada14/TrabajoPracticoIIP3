@@ -17,7 +17,7 @@ import org.openstreetmap.gui.jmapviewer.MapPolygonImpl;
 import org.openstreetmap.gui.jmapviewer.Style;
 
 import Model.Arista;
-import Model.Provincia;
+import Model.Vertice;
 import Persistence.GSONPersistencia;
 import Presenter.Presenter;
 
@@ -28,12 +28,14 @@ public class Mapa implements IMapaView {
 	private Presenter presenter;
 
 	private JTextField txtNombre, txtLat, txtLon, txtK, txtPeso;
-	private JComboBox<Provincia> comboOrigen, comboDestino;
+	private JComboBox<Vertice> comboOrigen, comboDestino;
 	private JButton btnAgregarProvincia, btnAgregarFrontera, btnCalcular;
 
 	// índice de provincia -> marcador, para poder recolorear al calcular regiones
 	private final Map<Integer, MapMarkerDot> marcadores = new HashMap<>();
 	private final Map<String, MapPolygonImpl> fronterasDibujadas = new HashMap<>();
+	
+	private int x = 670, w = 300, y = 10;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(() -> {
@@ -73,68 +75,16 @@ public class Mapa implements IMapaView {
 	}
 
 	private void armarPanelControles() {
-		int x = 670, w = 300, y = 10;
 
-		frame.getContentPane().add(etiqueta("Nueva provincia", x, y)); y += 25;
-		frame.getContentPane().add(etiqueta("Nombre:", x, y));
-		txtNombre = campoTexto(x + 80, y, w - 80); y += 30;
-		frame.getContentPane().add(etiqueta("Lat (click en mapa):", x, y));
-		txtLat = campoTexto(x + 150, y, w - 150); y += 30;
-		frame.getContentPane().add(etiqueta("Lon (click en mapa):", x, y));
-		txtLon = campoTexto(x + 150, y, w - 150); y += 30;
+		agregarZona();
+		agregarRelacion();
+		eliminarRelacion();
+		calcularRegiones();
+		guardarGrafo();
+		cargarGrafo();
+		cargarArchivo();
 
-		btnAgregarProvincia = new JButton("Agregar provincia");
-		btnAgregarProvincia.setBounds(x, y, w, 25);
-		btnAgregarProvincia.addActionListener(this::onAgregarProvincia);
-		frame.getContentPane().add(btnAgregarProvincia); y += 45;
 
-		frame.getContentPane().add(etiqueta("Nueva frontera", x, y)); y += 25;
-		frame.getContentPane().add(etiqueta("Origen:", x, y));
-		comboOrigen = new JComboBox<>();
-		comboOrigen.setBounds(x + 80, y, w - 80, 25);
-		frame.getContentPane().add(comboOrigen); y += 30;
-
-		frame.getContentPane().add(etiqueta("Destino:", x, y));
-		comboDestino = new JComboBox<>();
-		comboDestino.setBounds(x + 80, y, w - 80, 25);
-		frame.getContentPane().add(comboDestino); y += 30;
-
-		frame.getContentPane().add(etiqueta("Similaridad:", x, y));
-		txtPeso = campoTexto(x + 100, y, w - 100); y += 30;
-
-		btnAgregarFrontera = new JButton("Agregar frontera");
-		btnAgregarFrontera.setBounds(x, y, w, 25);
-		btnAgregarFrontera.addActionListener(this::onAgregarFrontera);
-		frame.getContentPane().add(btnAgregarFrontera); y += 45;
-
-		frame.getContentPane().add(etiqueta("Cantidad de regiones (k):", x, y)); y += 25;
-		txtK = campoTexto(x, y, 60);
-
-		btnCalcular = new JButton("Calcular regiones");
-		btnCalcular.setBounds(x + 70, y, w - 70, 25);
-		btnCalcular.addActionListener(this::onCalcularRegiones);
-		frame.getContentPane().add(btnCalcular); y += 35;
-
-		JButton btnGuardar = new JButton("Guardar");
-		btnGuardar.setBounds(x, y, (w - 10) / 2, 25);
-		btnGuardar.addActionListener(e -> presenter.guardarGrafo());
-		frame.getContentPane().add(btnGuardar);
-
-		JButton btnCargar = new JButton("Cargar");
-		btnCargar.setBounds(x + (w + 10) / 2, y, (w - 10) / 2, 25);
-		btnCargar.addActionListener(e -> presenter.cargarGrafo());
-		frame.getContentPane().add(btnCargar); y += 35;
-
-		JButton btnCargarDesde = new JButton("Cargar desde archivo...");
-		btnCargarDesde.setBounds(x, y, w, 25);
-		btnCargarDesde.addActionListener(this::onCargarDesdeArchivo);
-		frame.getContentPane().add(btnCargarDesde); y += 35;
-
-		JButton btnEliminarFrontera = new JButton("Eliminar frontera");
-		btnEliminarFrontera.setBounds(x, y, w, 25);
-		btnEliminarFrontera.addActionListener(e ->
-			presenter.eliminarFrontera(comboOrigen.getSelectedIndex(), comboDestino.getSelectedIndex()));
-		frame.getContentPane().add(btnEliminarFrontera);
 	}
 
 	private JLabel etiqueta(String texto, int x, int y) {
@@ -163,8 +113,8 @@ public class Mapa implements IMapaView {
 	}
 
 	private void onAgregarFrontera(ActionEvent e) {
-		Provincia origen = (Provincia) comboOrigen.getSelectedItem();
-		Provincia destino = (Provincia) comboDestino.getSelectedItem();
+		Vertice origen = (Vertice) comboOrigen.getSelectedItem();
+		Vertice destino = (Vertice) comboDestino.getSelectedItem();
 		if (origen == null || destino == null) {
 			mostrarMensaje("Necesitás al menos dos provincias cargadas.");
 			return;
@@ -208,7 +158,7 @@ public class Mapa implements IMapaView {
 	}
 
 	@Override
-	public void agregarMarcador(Provincia provincia, int indice) {
+	public void agregarMarcador(Vertice provincia, int indice) {
 		MapMarkerDot marcador = new MapMarkerDot(provincia.getNombre(),
 				new Coordinate(provincia.getLatitud(), provincia.getLongitud()));
 		mapa.addMapMarker(marcador);
@@ -219,7 +169,7 @@ public class Mapa implements IMapaView {
 	}
 
 	@Override
-	public void agregarFrontera(int origenIdx, int destinoIdx, Provincia origen, Provincia destino) {
+	public void agregarFrontera(int origenIdx, int destinoIdx, Vertice origen, Vertice destino) {
 		MapPolygonImpl poligono  = new MapPolygonImpl(List.of(
 				new Coordinate(origen.getLatitud(), origen.getLongitud()),
 				new Coordinate(destino.getLatitud(), destino.getLongitud()),
@@ -239,14 +189,14 @@ public class Mapa implements IMapaView {
 	}
 	
 	@Override
-	public void actualizarMapaConRegiones(List<Set<Integer>> regiones, List<Provincia> provincias) {
+	public void actualizarMapaConRegiones(List<Set<Integer>> regiones, List<Vertice> provincias) {
 		int colorIdx = 0;		
 		for(Set<Integer> region : regiones) {
 			Color color = new Color(COLORES_REGION[colorIdx % COLORES_REGION.length]);
 			for(int indice : region) {
 				MapMarkerDot viejo = marcadores.get(indice);
 				mapa.removeMapMarker(viejo);
-				Provincia provincia = provincias.get(indice);
+				Vertice provincia = provincias.get(indice);
 				MapMarkerDot nuevo = new MapMarkerDot(null, provincia.getNombre(), new Coordinate(provincia.getLatitud(), 
 						provincia.getLongitud()), new Style(Color.BLACK, color, null, null));
 				marcadores.put(indice, nuevo);
@@ -258,7 +208,7 @@ public class Mapa implements IMapaView {
 	}
 	
 	@Override
-	public void cargarPais(List<Provincia> provincias, List<Arista> aristas) {
+	public void cargarPais(List<Vertice> provincias, List<Arista> aristas) {
 		mapa.removeAllMapMarkers();
 		mapa.removeAllMapPolygons();
 		marcadores.clear();
@@ -277,6 +227,81 @@ public class Mapa implements IMapaView {
 	
 	private String keyFrontera(int a, int b) {
 		return Math.min(a, b) + "_" + Math.max(a, b);
+	}
+	
+	private void agregarZona() {
+		frame.getContentPane().add(etiqueta("Nueva Zona", x, y)); y += 25;
+		frame.getContentPane().add(etiqueta("Nombre:", x, y));
+		txtNombre = campoTexto(x + 80, y, w - 80); y += 30;
+		frame.getContentPane().add(etiqueta("Lat (click en mapa):", x, y));
+		txtLat = campoTexto(x + 150, y, w - 150); y += 30;
+		frame.getContentPane().add(etiqueta("Lon (click en mapa):", x, y));
+		txtLon = campoTexto(x + 150, y, w - 150); y += 30;
+
+		btnAgregarProvincia = new JButton("Agregar Zona");
+		btnAgregarProvincia.setBounds(x, y, w, 25);
+		btnAgregarProvincia.addActionListener(this::onAgregarProvincia);
+		frame.getContentPane().add(btnAgregarProvincia); y += 45;
+	}
+	
+	private void agregarRelacion() {
+		frame.getContentPane().add(etiqueta("Nueva Relacion", x, y)); y += 25;
+		frame.getContentPane().add(etiqueta("Origen:", x, y));
+		comboOrigen = new JComboBox<>();
+		comboOrigen.setBounds(x + 80, y, w - 80, 25);
+		frame.getContentPane().add(comboOrigen); y += 30;
+
+		frame.getContentPane().add(etiqueta("Destino:", x, y));
+		comboDestino = new JComboBox<>();
+		comboDestino.setBounds(x + 80, y, w - 80, 25);
+		frame.getContentPane().add(comboDestino); y += 30;
+
+		frame.getContentPane().add(etiqueta("Similaridad:", x, y));
+		txtPeso = campoTexto(x + 100, y, w - 100); y += 30;
+
+		btnAgregarFrontera = new JButton("Agregar Relacion");
+		btnAgregarFrontera.setBounds(x, y, w, 25);
+		btnAgregarFrontera.addActionListener(this::onAgregarFrontera);
+		frame.getContentPane().add(btnAgregarFrontera); y += 35;
+	}
+	
+	private void eliminarRelacion() {
+		JButton btnEliminarFrontera = new JButton("Eliminar Relacion");
+		btnEliminarFrontera.setBounds(x, y, w, 25); 	y += 25;
+		btnEliminarFrontera.addActionListener(e ->
+			presenter.eliminarFrontera(comboOrigen.getSelectedIndex(), comboDestino.getSelectedIndex()));
+		frame.getContentPane().add(btnEliminarFrontera);
+	}
+	
+	private void calcularRegiones() {
+		frame.getContentPane().add(etiqueta("Cantidad de regiones (k):", x, y)); y += 25;
+		txtK = campoTexto(x, y, 60);
+
+		btnCalcular = new JButton("Calcular regiones");
+		btnCalcular.setBounds(x + 70, y, w - 70, 25);
+		btnCalcular.addActionListener(this::onCalcularRegiones);
+		frame.getContentPane().add(btnCalcular); y += 35;
+	}
+	
+	private void guardarGrafo() {
+		JButton btnGuardar = new JButton("Guardar");
+		btnGuardar.setBounds(x, y, (w - 10) / 2, 25);
+		btnGuardar.addActionListener(e -> presenter.guardarGrafo());
+		frame.getContentPane().add(btnGuardar);
+	}
+	
+	private void cargarGrafo() {
+		JButton btnCargar = new JButton("Cargar");
+		btnCargar.setBounds(x + (w + 10) / 2, y, (w - 10) / 2, 25);
+		btnCargar.addActionListener(e -> presenter.cargarGrafo());
+		frame.getContentPane().add(btnCargar); y += 35;	
+	}
+	
+	private void cargarArchivo() {
+		JButton btnCargarDesde = new JButton("Cargar desde archivo...");
+		btnCargarDesde.setBounds(x, y, w, 25);
+		btnCargarDesde.addActionListener(this::onCargarDesdeArchivo);
+		frame.getContentPane().add(btnCargarDesde); y += 35;
 	}
 	
 }

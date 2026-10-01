@@ -4,37 +4,37 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Pais {
-	private List<Provincia> provincias = new ArrayList<Provincia>();
+	private List<Vertice> vertices = new ArrayList<Vertice>();
 	private Grafo grafo = new Grafo(0);
 	
-	public int agregarProvincia(Provincia provincia) {
-		provincias.add(provincia);
+	public int agregarVertice(Vertice provincia) {
+		vertices.add(provincia);
 		redimensionarGrafo();
-		return provincias.size() - 1;
+		return vertices.size() - 1;
 	}
 	
-	public void agregarFrontera(int origen, int destino, double similaridad) {
+	public void agregarRelacion(int origen, int destino, double similaridad) {
 		grafo.agregarArista(origen, destino, similaridad);
 	}
 	
-	public void eliminarFrontera(int origen, int destino) {
+	public void eliminarRelacion(int origen, int destino) {
 		grafo.eliminarArista(origen, destino);
 	}
 	
 	public void redimensionarGrafo() {
-		Grafo nuevo = new Grafo(provincias.size());
+		Grafo nuevo = new Grafo(vertices.size());
 		for(Arista a : grafo.aristas()) {
 			nuevo.agregarArista(a.getOrigen(), a.getDestino(), a.getPeso());
 		}
 		grafo = nuevo;
 	}
 
-	public List<Provincia> getProvincias() {
-		return provincias;
+	public List<Vertice> getVertices() {
+		return vertices;
 	}
 
-	public Provincia getProvincia(int indice) {
-		return provincias.get(indice);
+	public Vertice getProvincia(int indice) {
+		return vertices.get(indice);
 	}
 	
 	public Grafo getGrafo() {
