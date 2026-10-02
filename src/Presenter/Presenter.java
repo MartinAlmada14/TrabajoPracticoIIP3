@@ -10,81 +10,84 @@ import Model.Pais;
 import Model.Vertice;
 
 import Persistence.IPersistencia;
-
+import View.IControlesView;
 import View.IMapaView;
 
 public class Presenter {
 
-	private final IMapaView vista; 
+	private final IMapaView vistaMapa; 
 	private final IPersistencia persistencia;
+	private final IControlesView vistaControles;
 	private Pais pais;
 	
-	public Presenter(IMapaView vista, IPersistencia persistencia) {
-		this.vista = vista;
+	public Presenter(IMapaView vistaMapa, IPersistencia persistencia, IControlesView vistaControles) {
+		this.vistaMapa = vistaMapa;
 		this.persistencia = persistencia;
+		this.vistaControles = vistaControles;
 	}
 	
 	public void regionizador(int k) {
 		if(pais == null) {
-			vista.mostrarMensaje("Primero cargá o armá el grafo.");
+			vistaMapa.mostrarMensaje("Primero cargá o armá el grafo.");
 			return;
 		}
 		try {
 			List<Set<Integer>> regiones = new ArbolGeneradorMinimo(pais.getGrafo()).generarRegiones(k);
-			vista.actualizarMapaConRegiones(regiones, pais.getVertices());
+			vistaMapa.actualizarMapaConRegiones(regiones, pais.getVertices());
 		}
 		catch (Exception e) {
-			vista.mostrarMensaje("Error al calcular regiones: " + e.getMessage());
+			vistaMapa.mostrarMensaje("Error al calcular regiones: " + e.getMessage());
 		}
 	}
 	
-	public int agregarProvincia(String nombre, double latitud, double longitud) {
+	public int agregarVertice(String nombre, double latitud, double longitud) {
 		if(pais == null){
 			pais = new Pais();
 		}
-		Vertice provincia = new Vertice(nombre, latitud, longitud);
-		int indice = pais.agregarVertice(provincia);
-		vista.agregarMarcador(provincia, indice);
+		Vertice vertice = new Vertice(nombre, latitud, longitud);
+		int indice = pais.agregarVertice(vertice);
+		vistaMapa.agregarMarcador(vertice, indice);
+		vistaControles.agregarVertice(vertice);
 		return indice;
 	}
 	
-	public void agregarFrontera(int origen, int destino, double similiaridad) {
+	public void agregarArista(int origen, int destino, double peso) {
 		if(pais == null) {
-			vista.mostrarMensaje("Primero agregar minimo 2 provincias");
+			vistaMapa.mostrarMensaje("Primero agregar minimo 2 Vertices");
 			return;
 		}
 		try {
-			pais.agregarRelacion(origen, destino, similiaridad);
-			vista.agregarFrontera(origen, destino, pais.getProvincia(origen), pais.getProvincia(destino));
+			pais.agregarArista(origen, destino, peso);
+			vistaMapa.agregarArista(origen, destino, pais.getVertice(origen), pais.getVertice(destino));
 		}
 		catch (Exception e) {
-			vista.mostrarMensaje("Error al agregar frontera: " + e.getMessage());
+			vistaMapa.mostrarMensaje("Error al agregar la Arista: " + e.getMessage());
 		}
 		
 	}
 	
-	public void eliminarFrontera(int origen, int destino) {
+	public void eliminarArista(int origen, int destino) {
 		if(pais == null) {
 			return;
 		}
 		try {
-			pais.eliminarRelacion(origen, destino);
-			vista.eliminarFrontera(origen, destino);
-			vista.mostrarMensaje("Frontera eliminada");
+			pais.eliminarArista(origen, destino);
+			vistaMapa.eliminarArista(origen, destino);
+			vistaMapa.mostrarMensaje("Arista eliminada");
 		}
 		catch (Exception e) {
-			vista.mostrarMensaje("Error al eliminar frontera " + e.getMessage());
+			vistaMapa.mostrarMensaje("Error al eliminar la Arista " + e.getMessage());
 		}
 		
 	}
 	
 	public void guardarGrafo() {
 		if(pais == null) {
-			vista.mostrarMensaje("No hay grafo para guardar.");
+			vistaMapa.mostrarMensaje("No hay grafo para guardar.");
 			return;
 		}
 		persistencia.guardar(pais);
-		vista.mostrarMensaje("El grafo se guardo correctamente.");
+		vistaMapa.mostrarMensaje("El grafo se guardo correctamente.");
 	}
 	
 	public void cargarGrafo() {
@@ -98,9 +101,10 @@ public class Presenter {
 	public void cargarDesde(Optional<Pais> resultado) {
 		resultado.ifPresentOrElse(p -> {
 			this.pais = p; 
-			vista.cargarPais(p.getVertices(), p.getGrafo().aristas());
-			vista.mostrarMensaje("Grafo cargado");
-			}, () -> vista.mostrarMensaje("No se encontro ningun grafo en ese archivo."));
+			vistaMapa.cargarPais(p.getVertices(), p.getGrafo().aristas());
+
+			vistaMapa.mostrarMensaje("Grafo cargado");
+			}, () -> vistaMapa.mostrarMensaje("No se encontro ningun grafo en ese archivo."));
 	}
 	
 }

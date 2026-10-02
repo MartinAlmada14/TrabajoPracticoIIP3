@@ -3,6 +3,7 @@ package View;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import Persistence.GSONPersistencia;
 import Presenter.Presenter;
@@ -26,13 +27,22 @@ public class VentanaPrincipal {
 		frame.getContentPane().setLayout(null);
 		
 		vistaMapa = new VistaMapa(frame);
-		presenter = new Presenter(vistaMapa, new GSONPersistencia());
+		presenter = new Presenter(vistaMapa, new GSONPersistencia(), controles);
 		controles = new PanelControles();
 		
 		frame.add(vistaMapa.getMapa());
 		frame.add(controles);
 		
 		conectarEventos();
+		
+	    vistaMapa.setAccionClickMapa(coordenada -> {
+	        controles.establecerLatitud(
+	            coordenada.getLat()
+	        );
+	        controles.establecerLongitud(
+	            coordenada.getLon()
+	        );
+	    });
 	}
 	
 	public void mostrar() {
@@ -41,14 +51,36 @@ public class VentanaPrincipal {
 	
     private void conectarEventos() {
 
-        controles.setAccionGuardar(e -> presenter.guardarGrafo());
+        controles.setAccionAgregarVertice(
+                e -> agregarVertice()
+            );
         
-        controles.setAccionCargar(e -> presenter.cargarGrafo());
+        controles.setAccionAgregarVertice(
+                e -> agregarArista()
+            );
+    }
 
-        controles.setAccionCargarArchivo(e -> {});
+    private Object agregarArista() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-        controles.setAccionEliminarFrontera(e -> presenter.eliminarFrontera
-        		(controles.getIndiceOrigen(),controles.getIndiceDestino()) );
+	private void agregarVertice() {
+
+        try {
+            String nombre = controles.getNombre();
+            double latitud = Double.parseDouble(controles.getLatitud());
+            double longitud = Double.parseDouble(controles.getLongitud());
+
+            presenter.agregarVertice(nombre, latitud, longitud);
+            controles.limpiarNombre();
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(
+                frame,
+                "La latitud y longitud deben ser números."
+            );
+        }
     }
 
 	public static void main(String[] args) {

@@ -10,249 +10,259 @@ import javax.swing.JTextField;
 
 import Model.Vertice;
 
-public class PanelControles extends JPanel {
+public class PanelControles extends JPanel implements IControlesView{
 
-    private final int ANCHO = 300;
+	private final int ANCHO = 300;
 
-    private int y = 10;
+	private int y = 10;
 
-    private JTextField txtNombre;
-    private JTextField txtLat;
-    private JTextField txtLon;
-    private JTextField txtPeso;
-    private JTextField txtK;
+	private JTextField txtNombre;
+	private JTextField txtLat;
+	private JTextField txtLon;
+	private JTextField txtPeso;
+	private JTextField txtK;
 
-    private JComboBox<Vertice> comboOrigen;
-    private JComboBox<Vertice> comboDestino;
+	private JComboBox<Vertice> comboOrigen;
+	private JComboBox<Vertice> comboDestino;
 
-    private JButton btnAgregarProvincia;
-    private JButton btnAgregarFrontera;
-    private JButton btnCalcular;
-    private JButton btnGuardar;
-    private JButton btnCargar;
-    private JButton btnCargarArchivo;
-    private JButton btnEliminarFrontera;
-    private int separacion = 30;
+	private JButton btnAgregarVertice;
+	private JButton btnAgregarArista;
+	private JButton btnCalcular;
+	private JButton btnGuardar;
+	private JButton btnCargar;
+	private JButton btnCargarArchivo;
+	private JButton btnEliminarArista;
+	private int separacion = 30;
 
-    public PanelControles() {
-        setLayout(null);
-        setBounds(670, 10, ANCHO, 600);
+	public PanelControles() {
+		setLayout(null);
+		setBounds(670, 10, ANCHO, 600);
 
-        construirControles();
-    }
+		construirControles();
+	}
 
-    private void construirControles() {
+	private void construirControles() {
 
-        agregarZona();
-        agregarRelacion();
-        calcularRegiones();
-        agregarBotonesArchivo();
-        eliminarFrontera();
-    }
+		agregarZona();
+		agregarRelacion();
+		calcularRegiones();
+		agregarBotonesArchivo();
+		eliminarFrontera();
+	}
 
-    private void agregarZona() {
+	private void agregarZona() {
 
-        agregarEtiqueta("Nueva Zona");
-        y += separacion;
+		agregarEtiqueta("Nueva Zona");
+		y += separacion;
 
-        agregarEtiqueta("Nombre:");
-        txtNombre = agregarCampoTexto(80, ANCHO-80);
-        y += separacion;
+		agregarEtiqueta("Nombre:");
+		txtNombre = agregarCampoTexto(80, ANCHO-80);
+		y += separacion;
 
-        agregarEtiqueta("Lat (click en mapa):");
-        txtLat = agregarCampoTexto(150, ANCHO-150);
-        y += separacion;
+		agregarEtiqueta("Lat (click en mapa):");
+		txtLat = agregarCampoTexto(150, ANCHO-150);
+		y += separacion;
 
-        agregarEtiqueta("Lon (click en mapa):");
-        txtLon = agregarCampoTexto(150, ANCHO-150);
-        y += separacion;
+		agregarEtiqueta("Lon (click en mapa):");
+		txtLon = agregarCampoTexto(150, ANCHO-150);
+		y += separacion;
 
-        btnAgregarProvincia = new JButton("Agregar provincia");
-        btnAgregarProvincia.setBounds(0, y, ANCHO, 25);
-        add(btnAgregarProvincia);
+		btnAgregarVertice = new JButton("Agregar Vertice");
+		btnAgregarVertice.setBounds(0, y, ANCHO, 25);
+		add(btnAgregarVertice);
 
-        y += 45;
-    }
+		y += 45;
+	}
 
-    private void agregarRelacion() {
+	private void agregarRelacion() {
 
-        agregarEtiqueta("Nueva Relación");
-        y+=separacion;
+		agregarEtiqueta("Nueva Relación");
+		y+=separacion;
 
-        agregarEtiqueta("Origen:");
+		agregarEtiqueta("Origen:");
 
-        comboOrigen = new JComboBox<>();
-        comboOrigen.setBounds(80, y, ANCHO - 80, 25);
-        add(comboOrigen);
+		comboOrigen = new JComboBox<>();
+		comboOrigen.setBounds(80, y, ANCHO - 80, 25);
+		add(comboOrigen);
 
-        y += separacion;
+		y += separacion;
 
-        agregarEtiqueta("Destino:");
+		agregarEtiqueta("Destino:");
 
-        comboDestino = new JComboBox<>();
-        comboDestino.setBounds(80, y, ANCHO - 80, 25);
-        add(comboDestino);
+		comboDestino = new JComboBox<>();
+		comboDestino.setBounds(80, y, ANCHO - 80, 25);
+		add(comboDestino);
 
-        y += separacion;
+		y += separacion;
 
-        agregarEtiqueta("Similaridad:");
+		agregarEtiqueta("Similaridad:");
 
-        txtPeso = agregarCampoTexto(100, 22);
-        y += separacion;
+		txtPeso = agregarCampoTexto(100, ANCHO-100);
+		y += separacion;
 
-        btnAgregarFrontera = new JButton("Agregar Relación");
-        btnAgregarFrontera.setBounds(0, y, ANCHO, 25);
-        add(btnAgregarFrontera);
+		btnAgregarArista = new JButton("Agregar Arista");
+		btnAgregarArista.setBounds(0, y, ANCHO, 25);
+		add(btnAgregarArista);
 
-        y += 45;
-    }
+		y += 45;
+	}
 
-    private void calcularRegiones() {
+	private void calcularRegiones() {
 
-        agregarEtiqueta("Cantidad de regiones (k):");
-        y += separacion;
+		agregarEtiqueta("Cantidad de regiones (k):");
+		y += separacion;
 
-        txtK = new JTextField();
-        txtK.setBounds(0, y, 60, 22);
-        add(txtK);
+		txtK = new JTextField();
+		txtK.setBounds(0, y, 60, 22);
+		add(txtK);
 
-        btnCalcular = new JButton("Calcular regiones");
-        btnCalcular.setBounds(70, y, ANCHO - 70, 25);
-        add(btnCalcular);
+		btnCalcular = new JButton("Calcular regiones");
+		btnCalcular.setBounds(70, y, ANCHO - 70, 25);
+		add(btnCalcular);
 
-        y += 35;
-    }
+		y += 35;
+	}
 
-    private void agregarBotonesArchivo() {
+	private void agregarBotonesArchivo() {
 
-        btnGuardar = new JButton("Guardar");
-        btnGuardar.setBounds(0, y, (ANCHO - 10) / 2, 25);
-        add(btnGuardar);
+		btnGuardar = new JButton("Guardar");
+		btnGuardar.setBounds(0, y, (ANCHO - 10) / 2, 25);
+		add(btnGuardar);
 
-        btnCargar = new JButton("Cargar");
-        btnCargar.setBounds((ANCHO + 10) / 2, y, (ANCHO - 10) / 2, 25);
-        add(btnCargar);
+		btnCargar = new JButton("Cargar");
+		btnCargar.setBounds((ANCHO + 10) / 2, y, (ANCHO - 10) / 2, 25);
+		add(btnCargar);
 
-        y += 35;
+		y += 35;
 
-        btnCargarArchivo = new JButton("Cargar desde archivo...");
-        btnCargarArchivo.setBounds(0, y, ANCHO, 25);
-        add(btnCargarArchivo);
+		btnCargarArchivo = new JButton("Cargar desde archivo...");
+		btnCargarArchivo.setBounds(0, y, ANCHO, 25);
+		add(btnCargarArchivo);
 
-        y += 35;
-    }
+		y += 35;
+	}
 
-    private void eliminarFrontera() {
+	private void eliminarFrontera() {
 
-        btnEliminarFrontera = new JButton("Eliminar Relación");
-        btnEliminarFrontera.setBounds(0, y, ANCHO, 25);
-        add(btnEliminarFrontera);
+		btnEliminarArista = new JButton("Eliminar Relación");
+		btnEliminarArista.setBounds(0, y, ANCHO, 25);
+		add(btnEliminarArista);
 
-        y += 35;
-    }
+		y += 35;
+	}
 
-    private void agregarEtiqueta(String texto) {
+	private void agregarEtiqueta(String texto) {
 
-        JLabel etiqueta = new JLabel(texto);
-        etiqueta.setBounds(0, y, 200, 20);
-        add(etiqueta);
-    }
+		JLabel etiqueta = new JLabel(texto);
+		etiqueta.setBounds(0, y, 200, 20);
+		add(etiqueta);
+	}
 
-    private JTextField agregarCampoTexto(int x, int ancho) {
+	private JTextField agregarCampoTexto(int x, int ancho) {
 
-        JTextField campo = new JTextField();
-        campo.setBounds(x, y, ancho, 22);
-        add(campo);
+		JTextField campo = new JTextField();
+		campo.setBounds(x, y, ancho, 22);
+		add(campo);
 
-        return campo;
-    }
+		return campo;
+	}
 
-//	METODOS DE ACCION
+	//	METODOS DE ACCION
 
-    public void setAccionAgregarProvincia(ActionListener listener) {
-        btnAgregarProvincia.addActionListener(listener);
-    }
+	public void setAccionAgregarVertice(ActionListener listener) {
+		btnAgregarVertice.addActionListener(listener);
+	}
 
-    public void setAccionAgregarFrontera(ActionListener listener) {
-        btnAgregarFrontera.addActionListener(listener);
-    }
+	public void setAccionAgregarArista(ActionListener listener) {
+		btnAgregarArista.addActionListener(listener);
+	}
 
-    public void setAccionCalcular(ActionListener listener) {
-        btnCalcular.addActionListener(listener);
-    }
+	public void setAccionCalcular(ActionListener listener) {
+		btnCalcular.addActionListener(listener);
+	}
 
-    public void setAccionGuardar(ActionListener listener) {
-        btnGuardar.addActionListener(listener);
-    }
+	public void setAccionGuardar(ActionListener listener) {
+		btnGuardar.addActionListener(listener);
+	}
 
-    public void setAccionCargar(ActionListener listener) {
-        btnCargar.addActionListener(listener);
-    }
+	public void setAccionCargar(ActionListener listener) {
+		btnCargar.addActionListener(listener);
+	}
 
-    public void setAccionCargarArchivo(ActionListener listener) {
-        btnCargarArchivo.addActionListener(listener);
-    }
+	public void setAccionCargarArchivo(ActionListener listener) {
+		btnCargarArchivo.addActionListener(listener);
+	}
 
-    public void setAccionEliminarFrontera(ActionListener listener) {
-        btnEliminarFrontera.addActionListener(listener);
-    }
+	public void setAccionEliminarArista(ActionListener listener) {
+		btnEliminarArista.addActionListener(listener);
+	}
 
-// METODOS DE LECTURA
+	// METODOS DE LECTURA
 
-    public String getNombre() {
-        return txtNombre.getText().trim();
-    }
+	public String getNombre() {
+		return txtNombre.getText().trim();
+	}
 
-    public String getLatitud() {
-        return txtLat.getText().trim();
-    }
+	public String getLatitud() {
+		return txtLat.getText().trim();
+	}
 
-    public String getLongitud() {
-        return txtLon.getText().trim();
-    }
+	public String getLongitud() {
+		return txtLon.getText().trim();
+	}
 
-    public String getPeso() {
-        return txtPeso.getText().trim();
-    }
+	public String getPeso() {
+		return txtPeso.getText().trim();
+	}
 
-    public String getK() {
-        return txtK.getText().trim();
-    }
+	public String getK() {
+		return txtK.getText().trim();
+	}
 
-    public int getIndiceOrigen() {
-        return comboOrigen.getSelectedIndex();
-    }
+	public int getIndiceOrigen() {
+		return comboOrigen.getSelectedIndex();
+	}
 
-    public int getIndiceDestino() {
-        return comboDestino.getSelectedIndex();
-    }
+	public int getIndiceDestino() {
+		return comboDestino.getSelectedIndex();
+	}
 
-    public Vertice getOrigen() {
-        return (Vertice) comboOrigen.getSelectedItem();
-    }
+	public Vertice getOrigen() {
+		return (Vertice) comboOrigen.getSelectedItem();
+	}
 
-    public Vertice getDestino() {
-        return (Vertice) comboDestino.getSelectedItem();
-    }
+	public Vertice getDestino() {
+		return (Vertice) comboDestino.getSelectedItem();
+	}
 
-//    METODOS PARA ACTUALIZAR
+	@Override
+	public void agregarVertice(Vertice vertice) {
+		comboOrigen.addItem(vertice);
+		comboDestino.addItem(vertice);
+	}
 
-    public void agregarProvincia(Vertice provincia) {
-        comboOrigen.addItem(provincia);
-        comboDestino.addItem(provincia);
-    }
+	@Override
+	public void limpiarVertice() {
+		comboOrigen.removeAllItems();
+		comboDestino.removeAllItems();
+	}
 
-    public void limpiarProvincias() {
-        comboOrigen.removeAllItems();
-        comboDestino.removeAllItems();
-    }
+	@Override
+	public void limpiarNombre() {
+		txtNombre.setText("");
+	}
 
-    public void limpiarNombre() {
-        txtNombre.setText("");
-    }
+	@Override
+	public void limpiarPeso() {
+		txtPeso.setText("");
+	}
+	
+	public void establecerLatitud(double latitud) {
+	    txtLat.setText(String.valueOf(latitud));
+	}
 
-    public void limpiarPeso() {
-        txtPeso.setText("");
-    }
+	public void establecerLongitud(double longitud) {
+	    txtLon.setText(String.valueOf(longitud));
+	}
 }
 

@@ -13,11 +13,11 @@ public class Pais {
 		return vertices.size() - 1;
 	}
 	
-	public void agregarRelacion(int origen, int destino, double similaridad) {
+	public void agregarArista(int origen, int destino, double similaridad) {
 		grafo.agregarArista(origen, destino, similaridad);
 	}
 	
-	public void eliminarRelacion(int origen, int destino) {
+	public void eliminarArista(int origen, int destino) {
 		grafo.eliminarArista(origen, destino);
 	}
 	
@@ -33,7 +33,7 @@ public class Pais {
 		return vertices;
 	}
 
-	public Vertice getProvincia(int indice) {
+	public Vertice getVertice(int indice) {
 		return vertices.get(indice);
 	}
 	

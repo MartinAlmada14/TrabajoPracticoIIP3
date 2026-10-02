@@ -45,7 +45,7 @@ public class Mapa implements IMapaView {
 	}
 
 	public Mapa() {
-		presenter = new Presenter(this, new GSONPersistencia());
+//		presenter = new Presenter(this, new GSONPersistencia());
 		initialize();
 	}
 
@@ -105,7 +105,7 @@ public class Mapa implements IMapaView {
 			String nombre = txtNombre.getText().trim();
 			double lat = Double.parseDouble(txtLat.getText().trim());
 			double lon = Double.parseDouble(txtLon.getText().trim());
-			presenter.agregarProvincia(nombre, lat, lon);
+			presenter.agregarVertice(nombre, lat, lon);
 			txtNombre.setText("");
 		} catch (NumberFormatException ex) {
 			mostrarMensaje("Hacé click en el mapa para tomar la coordenada, y completá el nombre.");
@@ -121,7 +121,7 @@ public class Mapa implements IMapaView {
 		}
 		try {
 			double peso = Double.parseDouble(txtPeso.getText().trim());
-			presenter.agregarFrontera(comboOrigen.getSelectedIndex(), comboDestino.getSelectedIndex(), peso);
+			presenter.agregarArista(comboOrigen.getSelectedIndex(), comboDestino.getSelectedIndex(), peso);
 			txtPeso.setText("");
 		} catch (NumberFormatException ex) {
 			mostrarMensaje("La similaridad tiene que ser un número.");
@@ -169,7 +169,7 @@ public class Mapa implements IMapaView {
 	}
 
 	@Override
-	public void agregarFrontera(int origenIdx, int destinoIdx, Vertice origen, Vertice destino) {
+	public void agregarArista(int origenIdx, int destinoIdx, Vertice origen, Vertice destino) {
 		MapPolygonImpl poligono  = new MapPolygonImpl(List.of(
 				new Coordinate(origen.getLatitud(), origen.getLongitud()),
 				new Coordinate(destino.getLatitud(), destino.getLongitud()),
@@ -181,7 +181,7 @@ public class Mapa implements IMapaView {
 	}
 
 	@Override
-	public void eliminarFrontera(int origenIdx, int destinoIdx) {
+	public void eliminarArista(int origenIdx, int destinoIdx) {
 		MapPolygonImpl poligono = fronterasDibujadas.remove(keyFrontera(origenIdx, destinoIdx));
 		if(poligono != null) {
 			mapa.removeMapPolygon(poligono);
@@ -220,7 +220,7 @@ public class Mapa implements IMapaView {
 			agregarMarcador(provincias.get(i), i);
 		}
 		for(Arista a : aristas) {
-			agregarFrontera(a.getOrigen(), a.getDestino(), provincias.get(a.getOrigen()), provincias.get(a.getDestino()));
+			agregarArista(a.getOrigen(), a.getDestino(), provincias.get(a.getOrigen()), provincias.get(a.getDestino()));
 		}
 		
 	}
@@ -269,7 +269,7 @@ public class Mapa implements IMapaView {
 		JButton btnEliminarFrontera = new JButton("Eliminar Relacion");
 		btnEliminarFrontera.setBounds(x, y, w, 25); 	y += 25;
 		btnEliminarFrontera.addActionListener(e ->
-			presenter.eliminarFrontera(comboOrigen.getSelectedIndex(), comboDestino.getSelectedIndex()));
+			presenter.eliminarArista(comboOrigen.getSelectedIndex(), comboDestino.getSelectedIndex()));
 		frame.getContentPane().add(btnEliminarFrontera);
 	}
 	

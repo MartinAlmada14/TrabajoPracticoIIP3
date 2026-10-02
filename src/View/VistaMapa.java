@@ -1,10 +1,13 @@
 package View;
 
 import java.awt.Color;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Consumer;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -69,21 +72,15 @@ public class VistaMapa implements IMapaView {
     @Override
     public void agregarMarcador(Vertice provincia, int indice) {
 
-        MapMarkerDot marcador = new MapMarkerDot(
-            provincia.getNombre(),
-            new Coordinate(
-                provincia.getLatitud(),
-                provincia.getLongitud()
-            )
-        );
+        MapMarkerDot marcador = new MapMarkerDot(provincia.getNombre(), 
+        		new Coordinate(provincia.getLatitud(),provincia.getLongitud()));
 
         mapa.addMapMarker(marcador);
-
         marcadores.put(indice, marcador);
     }
 
     @Override
-    public void agregarFrontera(
+    public void agregarArista(
             int origenIdx,
             int destinoIdx,
             Vertice origen,
@@ -116,7 +113,7 @@ public class VistaMapa implements IMapaView {
     }
 
     @Override
-    public void eliminarFrontera(int origenIdx, int destinoIdx) {
+    public void eliminarArista(int origenIdx, int destinoIdx) {
 
         MapPolygonImpl poligono =
             aristasDibujadas.remove(
@@ -204,11 +201,8 @@ public class VistaMapa implements IMapaView {
 
         for (Arista arista : aristas) {
 
-            agregarFrontera(
-                arista.getOrigen(),
-                arista.getDestino(),
-                provincias.get(arista.getOrigen()),
-                provincias.get(arista.getDestino())
+            agregarArista(arista.getOrigen(),arista.getDestino(),
+            		provincias.get(arista.getOrigen()),provincias.get(arista.getDestino())
             );
         }
     }
@@ -219,4 +213,22 @@ public class VistaMapa implements IMapaView {
             + "_"
             + Math.max(a, b);
     }
+    
+    public void setAccionClickMapa(Consumer<Coordinate> accion) {
+
+        mapa.addMouseListener(new MouseAdapter() {
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+                if (e.getButton() == MouseEvent.BUTTON1) {
+
+                    Coordinate coordenada = (Coordinate) mapa.getPosition(e.getPoint());
+
+                    accion.accept(coordenada);
+                }
+            }
+        });
+    }
+    
 }
