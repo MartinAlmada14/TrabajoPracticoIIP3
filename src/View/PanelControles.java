@@ -32,6 +32,7 @@ public class PanelControles extends JPanel {
     private JButton btnCargar;
     private JButton btnCargarArchivo;
     private JButton btnEliminarFrontera;
+    private int separacion = 30;
 
     public PanelControles() {
         setLayout(null);
@@ -52,18 +53,19 @@ public class PanelControles extends JPanel {
     private void agregarZona() {
 
         agregarEtiqueta("Nueva Zona");
+        y += separacion;
 
         agregarEtiqueta("Nombre:");
-        txtNombre = agregarCampoTexto(80, 22);
-        y += 30;
+        txtNombre = agregarCampoTexto(80, ANCHO-80);
+        y += separacion;
 
         agregarEtiqueta("Lat (click en mapa):");
-        txtLat = agregarCampoTexto(150, 22);
-        y += 30;
+        txtLat = agregarCampoTexto(150, ANCHO-150);
+        y += separacion;
 
         agregarEtiqueta("Lon (click en mapa):");
-        txtLon = agregarCampoTexto(150, 22);
-        y += 30;
+        txtLon = agregarCampoTexto(150, ANCHO-150);
+        y += separacion;
 
         btnAgregarProvincia = new JButton("Agregar provincia");
         btnAgregarProvincia.setBounds(0, y, ANCHO, 25);
@@ -75,6 +77,7 @@ public class PanelControles extends JPanel {
     private void agregarRelacion() {
 
         agregarEtiqueta("Nueva Relación");
+        y+=separacion;
 
         agregarEtiqueta("Origen:");
 
@@ -82,7 +85,7 @@ public class PanelControles extends JPanel {
         comboOrigen.setBounds(80, y, ANCHO - 80, 25);
         add(comboOrigen);
 
-        y += 30;
+        y += separacion;
 
         agregarEtiqueta("Destino:");
 
@@ -90,12 +93,12 @@ public class PanelControles extends JPanel {
         comboDestino.setBounds(80, y, ANCHO - 80, 25);
         add(comboDestino);
 
-        y += 30;
+        y += separacion;
 
         agregarEtiqueta("Similaridad:");
 
         txtPeso = agregarCampoTexto(100, 22);
-        y += 30;
+        y += separacion;
 
         btnAgregarFrontera = new JButton("Agregar Relación");
         btnAgregarFrontera.setBounds(0, y, ANCHO, 25);
@@ -107,6 +110,7 @@ public class PanelControles extends JPanel {
     private void calcularRegiones() {
 
         agregarEtiqueta("Cantidad de regiones (k):");
+        y += separacion;
 
         txtK = new JTextField();
         txtK.setBounds(0, y, 60, 22);
@@ -152,8 +156,6 @@ public class PanelControles extends JPanel {
         JLabel etiqueta = new JLabel(texto);
         etiqueta.setBounds(0, y, 200, 20);
         add(etiqueta);
-
-        y += 25;
     }
 
     private JTextField agregarCampoTexto(int x, int ancho) {
@@ -165,9 +167,7 @@ public class PanelControles extends JPanel {
         return campo;
     }
 
-    // -------------------------------------------------
-    // Métodos para que el Presenter pueda escuchar
-    // -------------------------------------------------
+//	METODOS DE ACCION
 
     public void setAccionAgregarProvincia(ActionListener listener) {
         btnAgregarProvincia.addActionListener(listener);
@@ -197,9 +197,7 @@ public class PanelControles extends JPanel {
         btnEliminarFrontera.addActionListener(listener);
     }
 
-    // -------------------------------------------------
-    // Métodos para obtener los datos introducidos
-    // -------------------------------------------------
+// METODOS DE LECTURA
 
     public String getNombre() {
         return txtNombre.getText().trim();
@@ -237,9 +235,7 @@ public class PanelControles extends JPanel {
         return (Vertice) comboDestino.getSelectedItem();
     }
 
-    // -------------------------------------------------
-    // Métodos para actualizar los combos
-    // -------------------------------------------------
+//    METODOS PARA ACTUALIZAR
 
     public void agregarProvincia(Vertice provincia) {
         comboOrigen.addItem(provincia);

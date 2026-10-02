@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 
+import Persistence.GSONPersistencia;
 import Presenter.Presenter;
 
 public class VentanaPrincipal {
@@ -20,17 +21,35 @@ public class VentanaPrincipal {
 
 	private void inicializar() {
 		frame = new JFrame(nombre);		
+		frame.setBounds(100, 100, 1000, 650); // dentro del límite 1366x768
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
 		
-//		vistaMapa = new VistaMapa();
+		vistaMapa = new VistaMapa(frame);
+		presenter = new Presenter(vistaMapa, new GSONPersistencia());
 		controles = new PanelControles();
 		
-//		frame.add(vistaMapa);
+		frame.add(vistaMapa.getMapa());
 		frame.add(controles);
+		
+		conectarEventos();
 	}
 	
 	public void mostrar() {
 		frame.setVisible(true);
 	}
+	
+    private void conectarEventos() {
+
+        controles.setAccionGuardar(e -> presenter.guardarGrafo());
+        
+        controles.setAccionCargar(e -> presenter.cargarGrafo());
+
+        controles.setAccionCargarArchivo(e -> {});
+
+        controles.setAccionEliminarFrontera(e -> presenter.eliminarFrontera
+        		(controles.getIndiceOrigen(),controles.getIndiceDestino()) );
+    }
 
 	public static void main(String[] args) {
 	    EventQueue.invokeLater(() -> {
