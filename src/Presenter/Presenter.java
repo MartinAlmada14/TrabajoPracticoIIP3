@@ -7,6 +7,7 @@ import java.util.Set;
 
 import Model.ArbolGeneradorMinimo;
 import Model.Pais;
+import Model.ResultadoRegiones;
 import Model.Vertice;
 
 import Persistence.IPersistencia;
@@ -32,8 +33,8 @@ public class Presenter {
 			return;
 		}
 		try {
-			List<Set<Integer>> regiones = new ArbolGeneradorMinimo(pais.getGrafo()).generarRegiones(k);
-			vistaMapa.actualizarMapaConRegiones(regiones, pais.getVertices());
+			ResultadoRegiones resultado = new ArbolGeneradorMinimo(pais.getGrafo()).generarRegiones(k);
+			vistaMapa.actualizarMapaConRegiones(resultado.getRegiones(),resultado.getAristasConservadas(), pais.getVertices());
 		}
 		catch (Exception e) {
 			vistaMapa.mostrarMensaje("Error al calcular regiones: " + e.getMessage());
@@ -98,13 +99,17 @@ public class Presenter {
 		cargarDesde(persistencia.cargar(archivo));
 	}
 	
-	public void cargarDesde(Optional<Pais> resultado) {
-		resultado.ifPresentOrElse(p -> {
-			this.pais = p; 
-			vistaMapa.cargarPais(p.getVertices(), p.getGrafo().aristas());
-
-			vistaMapa.mostrarMensaje("Grafo cargado");
-			}, () -> vistaMapa.mostrarMensaje("No se encontro ningun grafo en ese archivo."));
+	private void cargarDesde(Optional<Pais> resultado) {
+		resultado.ifPresentOrElse(this::mostrarPais, 
+				() -> vistaMapa.mostrarMensaje("No se encontro ningun grafo en ese archivo."));
+		}
+	
+	private void mostrarPais(Pais pais) {
+		this.pais = pais;
+		vistaMapa.cargarPais(pais.getVertices(), pais.getGrafo().aristas());
+		vistaControles.limpiarVertice();
+		pais.getVertices().forEach(vistaControles::agregarVertice);
+		vistaMapa.mostrarMensaje("Grafo cargado");
 	}
 	
 }

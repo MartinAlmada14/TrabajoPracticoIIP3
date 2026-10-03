@@ -71,7 +71,6 @@ public class VistaMapa implements IMapaView {
 
     @Override
     public void agregarMarcador(Vertice provincia, int indice) {
-
         MapMarkerDot marcador = new MapMarkerDot(provincia.getNombre(), 
         		new Coordinate(provincia.getLatitud(),provincia.getLongitud()));
 
@@ -80,45 +79,23 @@ public class VistaMapa implements IMapaView {
     }
 
     @Override
-    public void agregarArista(
-            int origenIdx,
-            int destinoIdx,
-            Vertice origen,
-            Vertice destino) {
-
+    public void agregarArista(int origenIdx, int destinoIdx, Vertice origen, Vertice destino) {
         MapPolygonImpl poligono = new MapPolygonImpl(List.of(
 
-            new Coordinate(
-                origen.getLatitud(),
-                origen.getLongitud()
-            ),
+            new Coordinate(origen.getLatitud(), origen.getLongitud()),
+            
+            new Coordinate(destino.getLatitud(), destino.getLongitud()),
 
-            new Coordinate(
-                destino.getLatitud(),
-                destino.getLongitud()
-            ),
-
-            new Coordinate(
-                origen.getLatitud(),
-                origen.getLongitud()
-            )
-        ));
+            new Coordinate(origen.getLatitud(), origen.getLongitud())));
 
         mapa.addMapPolygon(poligono);
 
-        aristasDibujadas.put(
-            keyFrontera(origenIdx, destinoIdx),
-            poligono
-        );
+        aristasDibujadas.put(keyFrontera(origenIdx, destinoIdx), poligono);
     }
 
     @Override
     public void eliminarArista(int origenIdx, int destinoIdx) {
-
-        MapPolygonImpl poligono =
-            aristasDibujadas.remove(
-                keyFrontera(origenIdx, destinoIdx)
-            );
+        MapPolygonImpl poligono = aristasDibujadas.remove(keyFrontera(origenIdx, destinoIdx));
 
         if (poligono != null) {
             mapa.removeMapPolygon(poligono);
@@ -126,64 +103,41 @@ public class VistaMapa implements IMapaView {
     }
 
     @Override
-    public void actualizarMapaConRegiones(
-            List<Set<Integer>> regiones,
-            List<Vertice> provincias) {
+    public void actualizarMapaConRegiones(List<Set<Integer>> regiones, List<Arista> aristasArbol, List<Vertice> provincias) {
 
+    	for(MapPolygonImpl poligono : aristasDibujadas.values()) {
+    		mapa.removeMapPolygon(poligono);
+    	}
+    	aristasDibujadas.clear();
+    	for(Arista a : aristasArbol) {
+    		agregarArista(a.getOrigen(), a.getDestino(), provincias.get(a.getOrigen()), provincias.get(a.getDestino()));
+    	}
+    	
         int colorIdx = 0;
 
         for (Set<Integer> region : regiones) {
-
-            Color color = new Color(
-                COLORES_REGION[
-                    colorIdx % COLORES_REGION.length
-                ]
-            );
-
+        	Color color = new Color(COLORES_REGION[colorIdx % COLORES_REGION.length]);
+        	
             for (int indice : region) {
-
-                MapMarkerDot viejo =
-                    marcadores.get(indice);
-
+                MapMarkerDot viejo = marcadores.get(indice);
                 mapa.removeMapMarker(viejo);
-
-                Vertice provincia =
-                    provincias.get(indice);
-
-                MapMarkerDot nuevo = new MapMarkerDot(
-                    null,
-                    provincia.getNombre(),
-                    new Coordinate(
-                        provincia.getLatitud(),
-                        provincia.getLongitud()
-                    ),
-                    new Style(
-                        Color.BLACK,
-                        color,
-                        null,
-                        null
-                    )
-                );
-
+                Vertice provincia = provincias.get(indice);
+                MapMarkerDot nuevo = new MapMarkerDot(null, provincia.getNombre(),
+                		new Coordinate(provincia.getLatitud(),provincia.getLongitud()),
+                    new Style(Color.BLACK, color, null, null));
+                
                 marcadores.put(indice, nuevo);
-
                 mapa.addMapMarker(nuevo);
             }
 
             colorIdx++;
         }
 
-        mostrarMensaje(
-            "Se calcularon "
-            + regiones.size()
-            + " regiones"
-        );
+        mostrarMensaje("Se calcularon " + regiones.size() + " regiones");
     }
 
     @Override
-    public void cargarPais(
-            List<Vertice> provincias,
-            List<Arista> aristas) {
+    public void cargarPais(List<Vertice> provincias, List<Arista> aristas) {
 
         mapa.removeAllMapMarkers();
         mapa.removeAllMapPolygons();
@@ -193,10 +147,7 @@ public class VistaMapa implements IMapaView {
 
         for (int i = 0; i < provincias.size(); i++) {
 
-            agregarMarcador(
-                provincias.get(i),
-                i
-            );
+            agregarMarcador(provincias.get(i), i);
         }
 
         for (Arista arista : aristas) {
@@ -209,9 +160,7 @@ public class VistaMapa implements IMapaView {
 
     private String keyFrontera(int a, int b) {
 
-        return Math.min(a, b)
-            + "_"
-            + Math.max(a, b);
+        return Math.min(a, b) + "_" + Math.max(a, b);
     }
     
     public void setAccionClickMapa(Consumer<Coordinate> accion) {

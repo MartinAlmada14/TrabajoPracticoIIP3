@@ -189,7 +189,14 @@ public class Mapa implements IMapaView {
 	}
 	
 	@Override
-	public void actualizarMapaConRegiones(List<Set<Integer>> regiones, List<Vertice> provincias) {
+	public void actualizarMapaConRegiones(List<Set<Integer>> regiones, List<Arista> aristasArbol, List<Vertice> provincias) {
+    	for(MapPolygonImpl poligono : fronterasDibujadas.values()) {
+    		mapa.removeMapPolygon(poligono);
+    	}
+    	fronterasDibujadas.clear();
+    	for(Arista a : aristasArbol) {
+    		agregarArista(a.getOrigen(), a.getDestino(), provincias.get(a.getOrigen()), provincias.get(a.getDestino()));
+    	}
 		int colorIdx = 0;		
 		for(Set<Integer> region : regiones) {
 			Color color = new Color(COLORES_REGION[colorIdx % COLORES_REGION.length]);

@@ -22,7 +22,7 @@ public class ArbolGeneradorMinimo {
 		}
 	}
 
-	public List<Set<Integer>> generarRegiones(int k) {
+	public ResultadoRegiones generarRegiones(int k) {
 		if(k < 1 || k > arbol.tamano()) {
 			throw new IllegalArgumentException("Las posibles regiones que se pueden generar van de: 1 a " + arbol.tamano());
 		}
@@ -38,9 +38,10 @@ public class ArbolGeneradorMinimo {
 		for(int v = 0; v < arbol.tamano(); v++) {
 			porRaiz.computeIfAbsent(unionFind.buscar(v), r -> new HashSet<>()).add(v);
 		}
+		List<Arista>conservadas = new ArrayList<>(aristas.subList(0, aConservar));
 		System.out.println("aristas en el arbol: " + aristas.size());
 		System.out.println("aConservar: " + aConservar);
-		return new ArrayList<>(porRaiz.values());
+		return new ResultadoRegiones (new ArrayList<>(porRaiz.values()), conservadas);
 	}
 
 }

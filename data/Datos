@@ -114,10 +114,30 @@
       "nombre": "Jujuy",
       "latitud": -23.1605633090483,
       "longitud": -65.6103515625
+    },
+    {
+      "nombre": "CABA",
+      "latitud": -34.61512668346219,
+      "longitud": -58.4033203125
     }
   ],
   "grafo": {
     "aristas": [
+      {
+        "origen": 0,
+        "destino": 1,
+        "peso": 1.0
+      },
+      {
+        "origen": 6,
+        "destino": 23,
+        "peso": 1.0
+      },
+      {
+        "origen": 18,
+        "destino": 19,
+        "peso": 1.0
+      },
       {
         "origen": 1,
         "destino": 2,
@@ -129,99 +149,14 @@
         "peso": 2.0
       },
       {
-        "origen": 3,
-        "destino": 4,
-        "peso": 3.0
-      },
-      {
-        "origen": 3,
-        "destino": 5,
-        "peso": 6.0
-      },
-      {
-        "origen": 4,
-        "destino": 5,
-        "peso": 6.0
-      },
-      {
-        "origen": 4,
-        "destino": 14,
-        "peso": 6.0
-      },
-      {
         "origen": 5,
         "destino": 6,
         "peso": 2.0
       },
       {
-        "origen": 5,
-        "destino": 7,
-        "peso": 3.0
-      },
-      {
-        "origen": 5,
-        "destino": 14,
-        "peso": 6.0
-      },
-      {
-        "origen": 5,
-        "destino": 15,
-        "peso": 5.0
-      },
-      {
-        "origen": 6,
-        "destino": 8,
-        "peso": 3.0
-      },
-      {
-        "origen": 6,
-        "destino": 9,
-        "peso": 3.0
-      },
-      {
-        "origen": 9,
-        "destino": 7,
-        "peso": 4.0
-      },
-      {
-        "origen": 15,
-        "destino": 7,
-        "peso": 5.0
-      },
-      {
-        "origen": 7,
-        "destino": 17,
-        "peso": 5.0
-      },
-      {
-        "origen": 7,
-        "destino": 19,
-        "peso": 7.0
-      },
-      {
         "origen": 9,
         "destino": 8,
         "peso": 2.0
-      },
-      {
-        "origen": 8,
-        "destino": 10,
-        "peso": 6.0
-      },
-      {
-        "origen": 9,
-        "destino": 10,
-        "peso": 5.0
-      },
-      {
-        "origen": 9,
-        "destino": 13,
-        "peso": 7.0
-      },
-      {
-        "origen": 9,
-        "destino": 19,
-        "peso": 7.0
       },
       {
         "origen": 10,
@@ -239,26 +174,6 @@
         "peso": 2.0
       },
       {
-        "origen": 21,
-        "destino": 12,
-        "peso": 6.0
-      },
-      {
-        "origen": 19,
-        "destino": 13,
-        "peso": 6.0
-      },
-      {
-        "origen": 21,
-        "destino": 13,
-        "peso": 7.0
-      },
-      {
-        "origen": 14,
-        "destino": 15,
-        "peso": 3.0
-      },
-      {
         "origen": 14,
         "destino": 16,
         "peso": 2.0
@@ -269,44 +184,149 @@
         "peso": 2.0
       },
       {
-        "origen": 16,
-        "destino": 17,
-        "peso": 5.0
-      },
-      {
         "origen": 17,
         "destino": 18,
         "peso": 2.0
       },
       {
         "origen": 18,
-        "destino": 19,
-        "peso": 1.0
-      },
-      {
-        "origen": 18,
-        "destino": 20,
-        "peso": 2.0
-      },
-      {
-        "origen": 18,
-        "destino": 21,
-        "peso": 3.0
-      },
-      {
-        "origen": 19,
         "destino": 20,
         "peso": 2.0
       },
       {
         "origen": 19,
-        "destino": 21,
-        "peso": 3.0
+        "destino": 20,
+        "peso": 2.0
       },
       {
         "origen": 21,
         "destino": 22,
         "peso": 2.0
+      },
+      {
+        "origen": 3,
+        "destino": 4,
+        "peso": 3.0
+      },
+      {
+        "origen": 5,
+        "destino": 7,
+        "peso": 3.0
+      },
+      {
+        "origen": 6,
+        "destino": 8,
+        "peso": 3.0
+      },
+      {
+        "origen": 6,
+        "destino": 9,
+        "peso": 3.0
+      },
+      {
+        "origen": 14,
+        "destino": 15,
+        "peso": 3.0
+      },
+      {
+        "origen": 18,
+        "destino": 21,
+        "peso": 3.0
+      },
+      {
+        "origen": 19,
+        "destino": 21,
+        "peso": 3.0
+      },
+      {
+        "origen": 9,
+        "destino": 7,
+        "peso": 4.0
+      },
+      {
+        "origen": 5,
+        "destino": 15,
+        "peso": 5.0
+      },
+      {
+        "origen": 15,
+        "destino": 7,
+        "peso": 5.0
+      },
+      {
+        "origen": 7,
+        "destino": 17,
+        "peso": 5.0
+      },
+      {
+        "origen": 9,
+        "destino": 10,
+        "peso": 5.0
+      },
+      {
+        "origen": 16,
+        "destino": 17,
+        "peso": 5.0
+      },
+      {
+        "origen": 3,
+        "destino": 5,
+        "peso": 6.0
+      },
+      {
+        "origen": 4,
+        "destino": 5,
+        "peso": 6.0
+      },
+      {
+        "origen": 4,
+        "destino": 14,
+        "peso": 6.0
+      },
+      {
+        "origen": 5,
+        "destino": 14,
+        "peso": 6.0
+      },
+      {
+        "origen": 8,
+        "destino": 10,
+        "peso": 6.0
+      },
+      {
+        "origen": 21,
+        "destino": 12,
+        "peso": 6.0
+      },
+      {
+        "origen": 19,
+        "destino": 13,
+        "peso": 6.0
+      },
+      {
+        "origen": 7,
+        "destino": 19,
+        "peso": 7.0
+      },
+      {
+        "origen": 9,
+        "destino": 13,
+        "peso": 7.0
+      },
+      {
+        "origen": 9,
+        "destino": 19,
+        "peso": 7.0
+      },
+      {
+        "origen": 21,
+        "destino": 13,
+        "peso": 7.0
+      },
+      {
+        "origen": 0,
+        "destino": 21,
+        "peso": 10.0
       }
     ],
     "matriz": [
@@ -336,6 +356,11 @@
         null,
         null,
         null,
+        {
+          "origen": 0,
+          "destino": 21,
+          "peso": 10.0
+        },
         null,
         null
       ],
@@ -370,6 +395,7 @@
         null,
         null,
         null,
+        null,
         null
       ],
       [
@@ -403,6 +429,7 @@
         null,
         null,
         null,
+        null,
         null
       ],
       [
@@ -440,6 +467,7 @@
         null,
         null,
         null,
+        null,
         null
       ],
       [
@@ -477,6 +505,7 @@
         null,
         null,
         null,
+        null,
         null
       ],
       [
@@ -526,6 +555,7 @@
         null,
         null,
         null,
+        null,
         null
       ],
       [
@@ -563,7 +593,12 @@
         null,
         null,
         null,
-        null
+        null,
+        {
+          "origen": 6,
+          "destino": 23,
+          "peso": 1.0
+        }
       ],
       [
         null,
@@ -608,6 +643,7 @@
         },
         null,
         null,
+        null,
         null
       ],
       [
@@ -634,6 +670,7 @@
           "destino": 10,
           "peso": 6.0
         },
+        null,
         null,
         null,
         null,
@@ -694,6 +731,7 @@
         },
         null,
         null,
+        null,
         null
       ],
       [
@@ -735,6 +773,7 @@
         null,
         null,
         null,
+        null,
         null
       ],
       [
@@ -753,6 +792,7 @@
           "destino": 11,
           "peso": 2.0
         },
+        null,
         null,
         null,
         null,
@@ -797,6 +837,7 @@
           "destino": 12,
           "peso": 6.0
         },
+        null,
         null
       ],
       [
@@ -842,6 +883,7 @@
           "destino": 13,
           "peso": 7.0
         },
+        null,
         null
       ],
       [
@@ -883,6 +925,7 @@
         null,
         null,
         null,
+        null,
         null
       ],
       [
@@ -924,6 +967,7 @@
         null,
         null,
         null,
+        null,
         null
       ],
       [
@@ -957,6 +1001,7 @@
           "destino": 17,
           "peso": 5.0
         },
+        null,
         null,
         null,
         null,
@@ -995,6 +1040,7 @@
           "destino": 18,
           "peso": 2.0
         },
+        null,
         null,
         null,
         null,
@@ -1039,6 +1085,7 @@
           "destino": 21,
           "peso": 3.0
         },
+        null,
         null
       ],
       [
@@ -1088,6 +1135,7 @@
           "destino": 21,
           "peso": 3.0
         },
+        null,
         null
       ],
       [
@@ -1121,10 +1169,15 @@
         },
         null,
         null,
+        null,
         null
       ],
       [
-        null,
+        {
+          "origen": 0,
+          "destino": 21,
+          "peso": 10.0
+        },
         null,
         null,
         null,
@@ -1166,7 +1219,8 @@
           "origen": 21,
           "destino": 22,
           "peso": 2.0
-        }
+        },
+        null
       ],
       [
         null,
@@ -1195,6 +1249,37 @@
           "destino": 22,
           "peso": 2.0
         },
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        {
+          "origen": 6,
+          "destino": 23,
+          "peso": 1.0
+        },
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
         null
       ]
     ]

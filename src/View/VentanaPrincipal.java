@@ -1,10 +1,14 @@
 package View;
 
 import java.awt.EventQueue;
+import java.util.zip.ZipEntry;
 
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
+import Model.Vertice;
 import Persistence.GSONPersistencia;
 import Presenter.Presenter;
 
@@ -27,8 +31,8 @@ public class VentanaPrincipal {
 		frame.getContentPane().setLayout(null);
 		
 		vistaMapa = new VistaMapa(frame);
-		presenter = new Presenter(vistaMapa, new GSONPersistencia(), controles);
 		controles = new PanelControles();
+		presenter = new Presenter(vistaMapa, new GSONPersistencia(), controles);
 		
 		frame.add(vistaMapa.getMapa());
 		frame.add(controles);
@@ -51,19 +55,15 @@ public class VentanaPrincipal {
 	
     private void conectarEventos() {
 
-        controles.setAccionAgregarVertice(
-                e -> agregarVertice()
-            );
+        controles.setAccionAgregarVertice(e -> agregarVertice());
+        controles.setAccionAgregarArista(e -> agregarArista());
+        controles.setAccionEliminarArista(e -> eliminarArista());
+        controles.setAccionCalcular(e -> calcularRegiones());
+        controles.setAccionGuardar(e -> guardarGrafo());
+        controles.setAccionCargarArchivo(e -> cargarDesdeArchivo());
+        controles.setAccionCargar(e -> cargarGrafo());
         
-        controles.setAccionAgregarVertice(
-                e -> agregarArista()
-            );
     }
-
-    private Object agregarArista() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	private void agregarVertice() {
 
@@ -76,13 +76,44 @@ public class VentanaPrincipal {
             controles.limpiarNombre();
 
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(
-                frame,
-                "La latitud y longitud deben ser números."
-            );
+            JOptionPane.showMessageDialog(frame, "La latitud y longitud deben ser números.");
         }
     }
-
+	
+    private void agregarArista() {
+    	try {
+    		double peso = Double.parseDouble(controles.getPeso());
+    		presenter.agregarArista(controles.getIndiceOrigen(), controles.getIndiceDestino(), peso);
+    		controles.limpiarPeso();
+    	} catch (NumberFormatException e) {
+			JOptionPane.showMessageDialog(frame, e.getMessage());
+		}
+    }
+	
+    private void eliminarArista() {
+    	presenter.eliminarArista(controles.getIndiceOrigen(), controles.getIndiceDestino());
+    }
+    
+    private void calcularRegiones() {
+    	try {
+    		presenter.regionizador(Integer.parseInt(controles.getK()));
+    	} catch (NumberFormatException e) {
+			JOptionPane.showMessageDialog(frame, e.getMessage());
+		}
+    }
+    
+    private void guardarGrafo() {
+    	presenter.guardarGrafo();
+    }
+    
+    private void cargarGrafo() {
+    	presenter.cargarGrafo();
+    }
+    
+    private void cargarDesdeArchivo() {
+    	controles.elegirArchivo().ifPresent(presenter::cargarGrafoDesde);
+    }
+    
 	public static void main(String[] args) {
 	    EventQueue.invokeLater(() -> {
 	        VentanaPrincipal ventana = new VentanaPrincipal();

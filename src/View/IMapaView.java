@@ -8,7 +8,7 @@ import Model.Vertice;
 
 public interface IMapaView {
 	void mostrarMensaje(String mensaje);
-	void actualizarMapaConRegiones(List<Set<Integer>> regiones, List<Vertice> provincias);
+	void actualizarMapaConRegiones(List<Set<Integer>> regiones, List<Arista> aristasArbol, List<Vertice> provincias);
 	void agregarMarcador(Vertice provincia, int indice);
 	void agregarArista(int origenIdx, int destinoIdx, Vertice origen, Vertice destino);
 	void eliminarArista(int origenIdx, int destinoIdx);

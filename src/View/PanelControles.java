@@ -1,12 +1,16 @@
 package View;
 
 import java.awt.event.ActionListener;
+import java.nio.file.Path;
+import java.util.Optional;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import Model.Vertice;
 
@@ -172,11 +176,15 @@ public class PanelControles extends JPanel implements IControlesView{
 	public void setAccionAgregarVertice(ActionListener listener) {
 		btnAgregarVertice.addActionListener(listener);
 	}
-
+	
 	public void setAccionAgregarArista(ActionListener listener) {
 		btnAgregarArista.addActionListener(listener);
 	}
 
+	public void setAccionEliminarArista(ActionListener listener) {
+		btnEliminarArista.addActionListener(listener);
+	}
+	
 	public void setAccionCalcular(ActionListener listener) {
 		btnCalcular.addActionListener(listener);
 	}
@@ -193,9 +201,6 @@ public class PanelControles extends JPanel implements IControlesView{
 		btnCargarArchivo.addActionListener(listener);
 	}
 
-	public void setAccionEliminarArista(ActionListener listener) {
-		btnEliminarArista.addActionListener(listener);
-	}
 
 	// METODOS DE LECTURA
 
@@ -235,6 +240,15 @@ public class PanelControles extends JPanel implements IControlesView{
 		return (Vertice) comboDestino.getSelectedItem();
 	}
 
+	public Optional<Path> elegirArchivo(){
+		JFileChooser chooser = new JFileChooser();
+		chooser.setFileFilter(new FileNameExtensionFilter("Archivos JSON", "json"));
+		if(chooser.showOpenDialog(this) != JFileChooser.APPROVE_OPTION) {
+			return Optional.empty();
+		}
+		return Optional.of(chooser.getSelectedFile().toPath());
+	}
+	
 	@Override
 	public void agregarVertice(Vertice vertice) {
 		comboOrigen.addItem(vertice);
@@ -256,7 +270,7 @@ public class PanelControles extends JPanel implements IControlesView{
 	public void limpiarPeso() {
 		txtPeso.setText("");
 	}
-	
+
 	public void establecerLatitud(double latitud) {
 	    txtLat.setText(String.valueOf(latitud));
 	}
