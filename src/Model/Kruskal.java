@@ -10,24 +10,15 @@ public class Kruskal {
 	
 	
 	public List<Arista> calcular(Grafo grafo) {
-
 		aristas = grafo.aristas();
-
 		Collections.sort(aristas);
-
 		UnionFind unionFind = new UnionFind(grafo.tamano());
-
 		arbol = new ArrayList<Arista>();
-
 		for (Arista arista : aristas) {
-
 			int origen = arista.getOrigen();
 			int destino = arista.getDestino();
-
 			if (!unionFind.mismoConjunto(origen, destino)) {
-
 				arbol.add(arista);
-
 				unionFind.unir(origen, destino);
 			}
 

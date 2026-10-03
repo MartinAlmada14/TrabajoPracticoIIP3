@@ -14,7 +14,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import Model.Vertice;
 
-public class PanelControles extends JPanel implements IControlesView{
+public class PanelControles extends JPanel implements IControlesView {
 
 	private final int ANCHO = 300;
 
@@ -55,7 +55,6 @@ public class PanelControles extends JPanel implements IControlesView{
 	}
 
 	private void agregarZona() {
-
 		agregarEtiqueta("Nueva Zona");
 		y += separacion;
 
@@ -79,7 +78,6 @@ public class PanelControles extends JPanel implements IControlesView{
 	}
 
 	private void agregarRelacion() {
-
 		agregarEtiqueta("Nueva Relación");
 		y+=separacion;
 
@@ -112,7 +110,6 @@ public class PanelControles extends JPanel implements IControlesView{
 	}
 
 	private void calcularRegiones() {
-
 		agregarEtiqueta("Cantidad de regiones (k):");
 		y += separacion;
 
@@ -128,7 +125,6 @@ public class PanelControles extends JPanel implements IControlesView{
 	}
 
 	private void agregarBotonesArchivo() {
-
 		btnGuardar = new JButton("Guardar");
 		btnGuardar.setBounds(0, y, (ANCHO - 10) / 2, 25);
 		add(btnGuardar);
@@ -147,7 +143,6 @@ public class PanelControles extends JPanel implements IControlesView{
 	}
 
 	private void eliminarFrontera() {
-
 		btnEliminarArista = new JButton("Eliminar Relación");
 		btnEliminarArista.setBounds(0, y, ANCHO, 25);
 		add(btnEliminarArista);
@@ -156,14 +151,12 @@ public class PanelControles extends JPanel implements IControlesView{
 	}
 
 	private void agregarEtiqueta(String texto) {
-
 		JLabel etiqueta = new JLabel(texto);
 		etiqueta.setBounds(0, y, 200, 20);
 		add(etiqueta);
 	}
 
 	private JTextField agregarCampoTexto(int x, int ancho) {
-
 		JTextField campo = new JTextField();
 		campo.setBounds(x, y, ancho, 22);
 		add(campo);
@@ -242,7 +235,7 @@ public class PanelControles extends JPanel implements IControlesView{
 
 	public Optional<Path> elegirArchivo(){
 		JFileChooser chooser = new JFileChooser();
-		chooser.setFileFilter(new FileNameExtensionFilter("Archivos JSON", "json"));
+		chooser.setFileFilter(new FileNameExtensionFilter("Archivos JSON o TXT", "json", "txt"));
 		if(chooser.showOpenDialog(this) != JFileChooser.APPROVE_OPTION) {
 			return Optional.empty();
 		}

@@ -1,14 +1,10 @@
 package View;
 
 import java.awt.EventQueue;
-import java.util.zip.ZipEntry;
 
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
-import Model.Vertice;
 import Persistence.GSONPersistencia;
 import Presenter.Presenter;
 
@@ -66,7 +62,6 @@ public class VentanaPrincipal {
     }
 
 	private void agregarVertice() {
-
         try {
             String nombre = controles.getNombre();
             double latitud = Double.parseDouble(controles.getLatitud());

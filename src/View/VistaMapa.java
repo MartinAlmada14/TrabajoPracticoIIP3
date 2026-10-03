@@ -11,7 +11,6 @@ import java.util.function.Consumer;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 
 import org.openstreetmap.gui.jmapviewer.Coordinate;
 import org.openstreetmap.gui.jmapviewer.JMapViewer;
@@ -23,38 +22,26 @@ import Model.Arista;
 import Model.Vertice;
 
 public class VistaMapa implements IMapaView {
-
     private JMapViewer mapa;
-
     private Map<Integer, MapMarkerDot> marcadores;
     private Map<String, MapPolygonImpl> aristasDibujadas;
-
     private JFrame frame;
 
     private static final int[] COLORES_REGION = {
-        0xE41A1C,
-        0x377EB8,
-        0x4DAF4A,
-        0x984EA3,
-        0xFF7F00,
-        0xFFFF33,
-        0xA65628,
-        0xF781BF,
-        0x999999,
+        0xE41A1C, 0x377EB8, 0x4DAF4A,
+        0x984EA3, 0xFF7F00, 0xFFFF33,
+        0xA65628, 0xF781BF, 0x999999,
         0x66C2A5
     };
 
     public VistaMapa(JFrame frame) {
         this.frame = frame;
-
         marcadores = new HashMap<>();
         aristasDibujadas = new HashMap<>();
-
         inicializarMapa();
     }
 
     private void inicializarMapa() {
-
         mapa = new JMapViewer();
         mapa.setDisplayPosition(new Coordinate(-34.6, -64.0), 4);
         mapa.setBounds(10, 10, 650, 600);
@@ -73,7 +60,6 @@ public class VistaMapa implements IMapaView {
     public void agregarMarcador(Vertice provincia, int indice) {
         MapMarkerDot marcador = new MapMarkerDot(provincia.getNombre(), 
         		new Coordinate(provincia.getLatitud(),provincia.getLongitud()));
-
         mapa.addMapMarker(marcador);
         marcadores.put(indice, marcador);
     }
@@ -81,13 +67,10 @@ public class VistaMapa implements IMapaView {
     @Override
     public void agregarArista(int origenIdx, int destinoIdx, Vertice origen, Vertice destino) {
         MapPolygonImpl poligono = new MapPolygonImpl(List.of(
-
             new Coordinate(origen.getLatitud(), origen.getLongitud()),
-            
             new Coordinate(destino.getLatitud(), destino.getLongitud()),
-
             new Coordinate(origen.getLatitud(), origen.getLongitud())));
-
+        
         mapa.addMapPolygon(poligono);
 
         aristasDibujadas.put(keyFrontera(origenIdx, destinoIdx), poligono);
@@ -104,7 +87,6 @@ public class VistaMapa implements IMapaView {
 
     @Override
     public void actualizarMapaConRegiones(List<Set<Integer>> regiones, List<Arista> aristasArbol, List<Vertice> provincias) {
-
     	for(MapPolygonImpl poligono : aristasDibujadas.values()) {
     		mapa.removeMapPolygon(poligono);
     	}
@@ -129,16 +111,13 @@ public class VistaMapa implements IMapaView {
                 marcadores.put(indice, nuevo);
                 mapa.addMapMarker(nuevo);
             }
-
             colorIdx++;
         }
-
         mostrarMensaje("Se calcularon " + regiones.size() + " regiones");
     }
 
     @Override
     public void cargarPais(List<Vertice> provincias, List<Arista> aristas) {
-
         mapa.removeAllMapMarkers();
         mapa.removeAllMapPolygons();
 
@@ -146,12 +125,10 @@ public class VistaMapa implements IMapaView {
         aristasDibujadas.clear();
 
         for (int i = 0; i < provincias.size(); i++) {
-
             agregarMarcador(provincias.get(i), i);
         }
 
         for (Arista arista : aristas) {
-
             agregarArista(arista.getOrigen(),arista.getDestino(),
             		provincias.get(arista.getOrigen()),provincias.get(arista.getDestino())
             );
@@ -159,21 +136,15 @@ public class VistaMapa implements IMapaView {
     }
 
     private String keyFrontera(int a, int b) {
-
         return Math.min(a, b) + "_" + Math.max(a, b);
     }
     
     public void setAccionClickMapa(Consumer<Coordinate> accion) {
-
         mapa.addMouseListener(new MouseAdapter() {
-
             @Override
             public void mouseClicked(MouseEvent e) {
-
                 if (e.getButton() == MouseEvent.BUTTON1) {
-
                     Coordinate coordenada = (Coordinate) mapa.getPosition(e.getPoint());
-
                     accion.accept(coordenada);
                 }
             }
