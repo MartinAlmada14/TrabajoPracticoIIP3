@@ -5,7 +5,6 @@ public class Vertice {
 	private double latitud;
 	private double longitud;
 	
-	//PARA GSON
 	public Vertice() {
 		
 	}

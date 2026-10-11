@@ -6,7 +6,7 @@ public class Arista implements Comparable<Arista> {
 	private int destino;
 	private double peso;
 	
-	//PARA EL GSON
+	
 	public Arista() {
 		
 	}

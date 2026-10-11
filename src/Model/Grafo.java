@@ -13,7 +13,7 @@ public class Grafo {
 		matriz = new Arista[vertices][vertices];
 	}
 	
-	//CONSTRUCTOR VACIO PARA LA SERIALIZACION CON EL GSON
+	
 	public Grafo() {	
 	}
 
@@ -65,7 +65,6 @@ public class Grafo {
 		return vecinos;		
 	}
 
-	//	OBTENGO LAS ARISTAS SIN REPETIDOS
 	public List<Arista> aristas(){
 		aristas = new ArrayList<Arista>();
 
@@ -80,14 +79,12 @@ public class Grafo {
 		return aristas;
 	}
 
-	//	VERIFICA QUE LOS VERTICES NO SEAN IGUALES
 	private void verificarDistintos(int origen, int destino) {		
 		if( origen == destino) {
 			throw new IllegalArgumentException("No se permiten loops: (" + origen + ", " + destino + ")");
 		}
 	}
 
-	//VERIFICA QUE LOS VERTICES ESTEN EN RANGO	
 	private void verificarVertice(int vertice) {
 		if(vertice<0) {
 			throw new IllegalArgumentException("El vertice no puede ser negativo: " + vertice);
