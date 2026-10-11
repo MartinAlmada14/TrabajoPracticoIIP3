@@ -1,4 +1,4 @@
-package Model;
+package Model.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -7,6 +7,10 @@ import java.util.Set;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import Model.ArbolGeneradorMinimo;
+import Model.Grafo;
+import Model.ResultadoRegiones;
 
 public class ArbolGeneradorMinimoTest {
 

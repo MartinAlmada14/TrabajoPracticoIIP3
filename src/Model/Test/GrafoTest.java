@@ -1,4 +1,4 @@
-package Model;
+package Model.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -9,6 +9,9 @@ import java.util.Set;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import Model.Arista;
+import Model.Grafo;
 
 public class GrafoTest {
 
